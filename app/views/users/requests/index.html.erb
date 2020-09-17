@@ -1,0 +1,7 @@
+<% if @sent_from_users.present? %>
+  <% @sent_from_users.each do |u| %>
+    <%= u.name %>
+  <% end %>
+<% else %>
+  送られたユーザーはいません
+<% end %>

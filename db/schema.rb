@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_13_112703) do
+ActiveRecord::Schema.define(version: 2020_09_13_123532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "permission_requests", force: :cascade do |t|
+    t.integer "sent_from_id"
+    t.integer "sent_to_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sent_from_id", "sent_to_id"], name: "index_permission_requests_on_sent_from_id_and_sent_to_id", unique: true
+    t.index ["sent_from_id"], name: "index_permission_requests_on_sent_from_id"
+    t.index ["sent_to_id"], name: "index_permission_requests_on_sent_to_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
