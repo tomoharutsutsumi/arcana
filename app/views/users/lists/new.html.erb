@@ -1,0 +1,5 @@
+<%= form_with model: @list, url: user_lists_path, local: true do |f| %>
+  <%= f.label :title, 'リストのタイトル' %>
+  <%= f.text_field :title %>
+  <%= f.submit '追加' %>
+<% end %>

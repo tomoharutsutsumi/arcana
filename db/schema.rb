@@ -10,16 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_13_123532) do
+ActiveRecord::Schema.define(version: 2020_09_18_151341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "lists", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
+  create_table "permission_lists", force: :cascade do |t|
+    t.bigint "list_id"
+    t.bigint "permission_request_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_permission_lists_on_list_id"
+    t.index ["permission_request_id"], name: "index_permission_lists_on_permission_request_id"
+  end
 
   create_table "permission_requests", force: :cascade do |t|
     t.integer "sent_from_id"
     t.integer "sent_to_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
     t.index ["sent_from_id", "sent_to_id"], name: "index_permission_requests_on_sent_from_id_and_sent_to_id", unique: true
     t.index ["sent_from_id"], name: "index_permission_requests_on_sent_from_id"
     t.index ["sent_to_id"], name: "index_permission_requests_on_sent_to_id"
@@ -39,4 +57,7 @@ ActiveRecord::Schema.define(version: 2020_09_13_123532) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "lists", "users"
+  add_foreign_key "permission_lists", "lists"
+  add_foreign_key "permission_lists", "permission_requests"
 end

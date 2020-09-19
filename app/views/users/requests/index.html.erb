@@ -1,6 +1,7 @@
 <% if @sent_from_users.present? %>
   <% @sent_from_users.each do |u| %>
     <%= u.name %>
+    <%= check_requesting_user_status(current_user, u) %>
   <% end %>
 <% else %>
   送られたユーザーはいません
