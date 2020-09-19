@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   end
   resources :users do
     resources :requests, module: :users
+    resources :permission_lists, module: :users
+    resources :permitted_lists, controller: 'users/permission_lists/permitted_lists'
+    resources :lists, module: :users
   end
+  resources :lists
 end

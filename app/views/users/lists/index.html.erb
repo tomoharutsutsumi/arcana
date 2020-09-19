@@ -1,0 +1,4 @@
+<%= link_to 'リスト追加', new_user_list_path(current_user) %>
+<% @lists.each do |l| %>
+  <%= l.title %>
+<% end %>

@@ -12,4 +12,5 @@ class User < ApplicationRecord
                                          foreign_key: 'sent_to_id', 
                                          dependent: :destroy
   has_many :sent_from_users, through: :passive_permission_requests, source: :sent_from
+  has_many :lists
 end

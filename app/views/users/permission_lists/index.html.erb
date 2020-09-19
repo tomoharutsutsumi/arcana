@@ -1,0 +1,8 @@
+承認したユーザーと共有するリストを選択してください
+<% @lists.each do |l| %>
+  <%= l.title %>
+  <%= link_to '共有する', user_permission_lists_path(current_user, 
+                                                    list_id: l.id, 
+                                                    permission_request_id: @permission_request_id), method: :post%>
+                                                    <%# チェックボックス　%>
+<% end %>
