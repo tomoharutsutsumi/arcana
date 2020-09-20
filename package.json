@@ -1,5 +1,7 @@
 {
   "name": "arcana",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "rfs": "^9.0.3"
+  }
 }
