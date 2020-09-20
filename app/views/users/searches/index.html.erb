@@ -9,8 +9,3 @@
   <%= f.text_field :email %>
   <%= f.submit '検索' %>
 <% end %>
-
-<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-<%= link_to 'リクエストされた人一覧', user_requests_path(current_user) %>
-<%= link_to 'Myリスト', user_lists_path(current_user) %>
-<%= link_to 'リスト一覧', user_permitted_lists_path(current_user) %>
