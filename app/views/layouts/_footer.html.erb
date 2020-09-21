@@ -1,10 +1,22 @@
 <% if user_signed_in? %>
   <div class="container"> 
     <div class="row">
-      <%= link_to 'Myリスト', user_lists_path(current_user), class: "py-3 btn col-3 text-center small border" %>
-      <%= link_to 'リスト一覧', user_permitted_lists_path(current_user), class: "py-3 btn col-3 text-center small border" %>
-      <%= link_to '検索', users_searches_path, class: "py-3 btn col-3 text-center small border" %>
-      <%= link_to 'リクエスト', user_requests_path(current_user), class: "py-3 btn col-3 text-center small border" %>
+      <%= link_to(user_lists_path(current_user), class: "py-3 btn col-3 text-center small border") do %>
+        <div><%= fa_icon "star", class: "fa-2x" %></div>
+        <div>Myリスト</div>
+      <% end %>
+      <%= link_to(user_permitted_lists_path(current_user), class: "py-3 btn col-3 text-center small border") do %>
+        <div><%= fa_icon "list-alt", class: "fa-2x" %></div>
+        <div>リスト一覧</div>
+      <% end %>
+      <%= link_to(users_searches_path, class: "py-3 btn col-3 text-center small border") do %>
+        <div><%= fa_icon "users", class: "fa-2x" %></div>
+        <div>検索</div>
+      <% end %>
+      <%= link_to(user_requests_path(current_user), class: "py-3 btn col-3 text-center small border") do %>
+        <div><%= fa_icon "user", class: "fa-2x" %></div>
+        <div>マイページ</div>
+      <% end %>
     </div>
   </div>
 <% else %>

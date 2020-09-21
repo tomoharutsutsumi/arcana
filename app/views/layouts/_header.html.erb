@@ -1,2 +1,9 @@
-<h6 class="text-center py-3 bg-success text-white">アルカナ</h6>
-<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+<div class="container">
+  <div class="py-3 bg-success text-white row">
+    <div class="col-4"></div>
+    <h6 class="col-4 text-center">アルカナ</h6>
+    <% if user_signed_in? %>
+      <div class="col-4 text-center"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "text-white" %></div>
+    <% end %>
+  </div>
+</div>
