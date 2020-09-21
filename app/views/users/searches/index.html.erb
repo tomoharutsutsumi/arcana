@@ -1,4 +1,5 @@
-<%= form_with url: users_searches_path, method: :get, local: true, class: "mt-5" do |f| %>
+<h4 class="mt-5">ユーザー検索</h4>
+<%= form_with url: users_searches_path, method: :get, local: true, class: "mt-2" do |f| %>
   <%= f.label :name, '名前で検索' %>
   <div><%= f.text_field :name,  class: "w-100" %></div>
   <div class="mt-3 text-center"><%= f.submit '検索' %></div>
@@ -9,8 +10,29 @@
       <div class="text-center">
         <%= u.name %>
         <%= check_requested_user_status(current_user, u) %>
-        <%#= link_to 'リクエスト', new_user_request_path(u) %>
       </div>
     <% end %>
+  <% end %>
+</div>
+<hr/>
+<h4>リクエストされたユーザー一覧</h4>
+<div class="mt-5">
+  <% if @sent_from_users.present? %>
+    <% @sent_from_users.each do |u| %>
+      <div class="card my-2">
+        <div class="card-body row">
+          <div class="col-6"><%= u.name %></div>
+          <div class="col-6"><%= check_requesting_user_status(current_user, u) %></div>
+        </div>
+        <div class="card-footer">
+          <h6>承認したリスト</h6>
+          <% find_request(u.id, current_user.id).lists.each do |l| %>
+            <div><%= l.title %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center">リクエストされたユーザーはいません</div>
   <% end %>
 </div>
