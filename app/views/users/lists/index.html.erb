@@ -1,4 +1,11 @@
-<%= link_to 'リスト追加', new_user_list_path(current_user) %>
-<% @lists.each do |l| %>
-  <%= l.title %>
-<% end %>
+<div class="mt-5">
+  <div class="text-right mb-3"><%= link_to '+リスト追加', new_user_list_path(current_user) %></div>  
+  <% @lists.each do |l| %>
+    <div class="card my-2">
+      <div class="card-body row">
+        <div class="col-8"><%= l.title %></div>
+        <div class="col-4"><%= l.user.name %></div>
+      </div>
+    </div>
+  <% end %>
+</div>
