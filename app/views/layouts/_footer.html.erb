@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <div class="container"> 
+  <div class="container fixed-bottom bg-white"> 
     <div class="row">
       <%= link_to(user_lists_path(current_user), class: "py-3 btn col-3 text-center small border") do %>
         <div><%= fa_icon "star", class: "fa-2x" %></div>

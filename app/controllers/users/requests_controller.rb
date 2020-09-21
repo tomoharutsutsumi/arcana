@@ -1,5 +1,5 @@
 class Users::RequestsController < ApplicationController
-  before_action :set_user, only: %i(new create)
+  before_action :set_user, only: %i(new create update)
 
   def new; end
 
@@ -9,7 +9,7 @@ class Users::RequestsController < ApplicationController
   end
 
   def update
-    permission_request = PermissionRequest.find_by(sent_from_id: params[:user_id], sent_to_id: current_user.id)
+    permission_request = PermissionRequest.find_by(sent_from_id: @user.id, sent_to_id: current_user.id)
     if params[:judge] == 'permit'
       permission_request.update(status: PermissionRequest::PERMITTED)
       redirect_to user_permission_lists_path(current_user, permission_request_id: permission_request.id)
