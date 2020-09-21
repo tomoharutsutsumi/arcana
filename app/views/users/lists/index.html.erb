@@ -1,6 +1,6 @@
 <div class="mt-5">
   <div class="text-right mb-3"><%= link_to '+リスト追加', new_user_list_path(current_user) %></div>  
-  <% if @list.present? %>
+  <% if @lists.present? %>
     <% @lists.each do |l| %>
       <div class="card my-2">
         <div class="card-body row">
