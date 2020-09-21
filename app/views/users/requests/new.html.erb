@@ -1,2 +1,5 @@
-<%= @user.name %>
-<%= link_to 'リクエスト', user_requests_path(@user), method: :post %>
+<div class="text-center mt-5">
+  <div><%= fa_icon "user-circle", class: "fa-3x" %></div>
+  <div><%= @user.name %></div>
+  <div class="mt-1"><%= link_to '+リクエスト', user_requests_path(@user), method: :post %></div>
+</div>

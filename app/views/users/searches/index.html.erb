@@ -1,11 +1,17 @@
-<% if @searched_users.present? %>
-  <% @searched_users.each do |u| %>
-    <%= u.email %>
-    <%= link_to 'リクエスト', new_user_request_path(u) %>
+<h1>ユーザー検索</h1>
+<%= form_with url: users_searches_path, method: :get, local: true, class: "mt-5" do |f| %>
+  <%= f.label :email, 'メールアドレス検索' %>
+  <div><%= f.text_field :email,  class: "w-100" %></div>
+  <div class="mt-3 text-center"><%= f.submit '検索' %></div>
+<% end %>
+<div class="mt-5">
+  <% if @searched_users.present? %>
+    <% @searched_users.each do |u| %>
+      <div class="text-center">
+        <%= u.email %>
+        <%= check_requested_user_status(current_user, u) %>
+        <%#= link_to 'リクエスト', new_user_request_path(u) %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
-<%= form_with url: users_searches_path, method: :get, local: true do |f| %>
-  <%= f.label :email, '名前' %>
-  <%= f.text_field :email %>
-  <%= f.submit '検索' %>
-<% end %>
+</div>
