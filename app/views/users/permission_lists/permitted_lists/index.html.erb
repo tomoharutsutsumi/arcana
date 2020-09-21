@@ -1,3 +1,14 @@
-<% @permitted_lists.each do |l| %>
-  <%= l.title %>
-<% end %>
+<div class="mt-5">
+  <% if @permitted_lists.present? %>
+    <% @permitted_lists.each do |l| %>
+      <div class="card my-2">
+        <div class="card-body">
+          <div><%= l.title %></div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center">許可されたリストはありません</div>
+  <% end %>
+</div>
+<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
