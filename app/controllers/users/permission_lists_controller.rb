@@ -5,7 +5,9 @@ class Users::PermissionListsController < ApplicationController
   end
 
   def create
-    PermissionList.create!(list_id: params[:list_id], permission_request_id: params[:permission_request_id])
+    params[:list_ids].each do |id|
+      PermissionList.create!(list_id: id, permission_request_id: params[:permission_request_id])
+    end
     redirect_to user_requests_path(current_user)
   end
 

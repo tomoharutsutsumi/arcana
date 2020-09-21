@@ -18,6 +18,7 @@
 !/storage/.keep
 
 /node_modules
+!/node_modules/rfs
 /yarn-error.log
 
 /public/assets
