@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_18_151341) do
+ActiveRecord::Schema.define(version: 2020_09_21_093137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,21 @@ ActiveRecord::Schema.define(version: 2020_09_18_151341) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
+  create_table "participants", force: :cascade do |t|
+    t.string "name"
+    t.string "job"
+    t.bigint "restaurant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_participants_on_restaurant_id"
+  end
+
   create_table "permission_lists", force: :cascade do |t|
     t.bigint "list_id"
     t.bigint "permission_request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["list_id", "permission_request_id"], name: "index_permission_lists_on_list_id_and_permission_request_id", unique: true
     t.index ["list_id"], name: "index_permission_lists_on_list_id"
     t.index ["permission_request_id"], name: "index_permission_lists_on_permission_request_id"
   end
@@ -41,6 +51,17 @@ ActiveRecord::Schema.define(version: 2020_09_18_151341) do
     t.index ["sent_from_id", "sent_to_id"], name: "index_permission_requests_on_sent_from_id_and_sent_to_id", unique: true
     t.index ["sent_from_id"], name: "index_permission_requests_on_sent_from_id"
     t.index ["sent_to_id"], name: "index_permission_requests_on_sent_to_id"
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.bigint "list_id"
+    t.integer "price"
+    t.text "comment"
+    t.text "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "participant"
+    t.index ["list_id"], name: "index_restaurants_on_list_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,6 +79,8 @@ ActiveRecord::Schema.define(version: 2020_09_18_151341) do
   end
 
   add_foreign_key "lists", "users"
+  add_foreign_key "participants", "restaurants"
   add_foreign_key "permission_lists", "lists"
   add_foreign_key "permission_lists", "permission_requests"
+  add_foreign_key "restaurants", "lists"
 end

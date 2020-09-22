@@ -13,5 +13,7 @@ Rails.application.routes.draw do
     resources :permitted_lists, controller: 'users/permission_lists/permitted_lists'
     resources :lists, module: :users
   end
-  resources :lists
+  resources :lists do
+    resources :restaurants, module: :lists
+  end
 end

@@ -8,7 +8,7 @@ class Users::PermissionListsController < ApplicationController
     params[:list_ids].each do |id|
       PermissionList.create!(list_id: id, permission_request_id: params[:permission_request_id])
     end
-    redirect_to user_requests_path(current_user)
+    redirect_to users_searches_path
   end
 
   def show

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  references: 
+  price: 1
+  comment: MyText
+  url: MyText
+
+two:
+  references: 
+  price: 1
+  comment: MyText
+  url: MyText
