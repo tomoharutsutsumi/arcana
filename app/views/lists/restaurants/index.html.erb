@@ -1,0 +1,31 @@
+<div class="text-right mt-5">
+  <%= 
+    link_to_if(@list.user.id == current_user.id, '+お店を登録する', new_list_restaurant_path(@list)) do 
+      ''
+    end
+  %>
+</div>
+<% if @restaurants.present? %>
+  <% @restaurants.each do |r| %>
+    <div class="card my-2">
+      <div class="card-body row">
+        <div class="col-6">
+          <div>・予算</div>
+          <div>・コメント</div>
+          <div>・同行者</div>
+        </div>
+        <div class="col-6">
+          <div><%= r.price %>円</div>
+          <div><%= r.comment %></div>
+          <div><%= r.participant %></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div>URL</div>
+        <div><%= link_to 'お店のURL', r.url, target: '_blank' %></div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="text-center mt-3">まだお店が登録されていません</div>
+<% end %>

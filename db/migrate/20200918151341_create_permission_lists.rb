@@ -6,5 +6,6 @@ class CreatePermissionLists < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    add_index :permission_lists, [:list_id, :permission_request_id], unique: true
   end
 end
