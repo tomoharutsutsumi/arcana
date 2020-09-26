@@ -15,7 +15,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '2244bcf1bb31de3255adb65b3c64d8bfe474d885ff2e4e9f674c3080d700e2a3c0ce270bb7dabf77b9dcdb04f99848f0827efd062c0e5e8d2a2d6960fff87d40'
-
+  config.omniauth :facebook, ENV['FACEBOOK_ID'], ENV['FACEBOOK_SECRET_ID']
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'

@@ -10,7 +10,4 @@ class Users::PermissionListsController < ApplicationController
     end
     redirect_to users_searches_path
   end
-
-  def show
-  end
 end
