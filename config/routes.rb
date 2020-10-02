@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :lists do
     resources :restaurants, module: :lists
   end
+  resources :restaurants
 end

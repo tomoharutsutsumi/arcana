@@ -15,7 +15,7 @@ class Users::RequestsController < ApplicationController
       redirect_to user_permission_lists_path(current_user, permission_request_id: permission_request.id)
     elsif params[:judge] == 'reject'
       permission_request.update(status: PermissionRequest::REJECTED)
-      user_requests_path(current_user)
+      redirect_to users_searches_path(current_user)
     end
   end
 

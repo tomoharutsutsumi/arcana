@@ -7,22 +7,33 @@
 </div>
 <% if @restaurants.present? %>
   <% @restaurants.each do |r| %>
-    <div class="card my-2">
+    <div class="card my-3">
+      <div class="card-header d-flex justify-content-end">
+        <% if @list.user.id == current_user.id %>
+          <%= link_to '詳細', restaurant_path(r), class: "mx-2" %>
+          <%= link_to '編集', edit_restaurant_path(r), class: "mx-2" %>
+          <%= link_to '削除', restaurant_path(r), data: { confirm: "本当によろしいですか?" }, method: :delete, class: "mx-2" %>
+        <% end %>
+      </div>
       <div class="card-body row">
         <div class="col-6">
+          <div>・店名</div>
+          <div>・カテゴリ</div>
+          <div>・場所</div>
           <div>・予算</div>
-          <div>・コメント</div>
+          <div>・おすすめコース</div>
           <div>・同行者</div>
+          <div>・コメント</div>
         </div>
         <div class="col-6">
+          <div><%= r.name&.truncate(7) %></div>
+          <div><%= r.category&.truncate(7) %></div>
+          <div><%= r.place&.truncate(7) %></div>
           <div><%= r.price %>円</div>
-          <div><%= r.comment %></div>
-          <div><%= r.participant %></div>
+          <div><%= r.recommended_menu&.truncate(7) %></div>
+          <div><%= r.participant&.truncate(7) %></div>
+          <div><%= r.comment&.truncate(7) %></div>
         </div>
-      </div>
-      <div class="card-footer d-flex justify-content-between">
-        <div>URL</div>
-        <div><%= link_to 'お店のURL', r.url, target: '_blank' %></div>
       </div>
     </div>
   <% end %>

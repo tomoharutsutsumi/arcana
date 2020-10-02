@@ -22,6 +22,6 @@ class Lists::RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:url, :price, :comment, :participant)
+    params.require(:restaurant).permit(:url, :price, :comment, :participant, :name, :place, :recommended_menu, :category)
   end
 end

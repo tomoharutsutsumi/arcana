@@ -1,11 +1,11 @@
-<%= form_with model: @restaurant, url: list_restaurants_path, local: true, class: "text-center" do |f| %>
+<%= form_with model: @restaurant, url: restaurant_path(@restaurant), local: true, method: :patch, class: "text-center" do |f| %>
   <%= f.text_field :name, placeholder: '店名', class: "py-2 my-2 w-100" %>
   <%= f.text_field :category, placeholder: 'カテゴリ', class: "py-2 my-2 w-100" %>
   <%= f.text_field :place, placeholder: '場所', class: "py-2 my-2 w-100" %>
   <%= f.number_field :price, placeholder: '予算', class: "py-2 my-2 w-100" %>
   <%= f.text_field :recommended_menu, placeholder: 'おすすめコース', class: "py-2 my-2 w-100" %>
   <%= f.text_field :participant, placeholder: 'どのような人と行きましたか', class: "py-2 my-2 w-100" %>
-  <%= f.text_area :comment, rows: 10, placeholder: 'コメント', class: "py-2 my-2 w-100 h-100" %>
+  <%= f.text_area :comment, rows: 10, placeholder: 'コメント', class: "py-2 my-2 w-100" %>
   <%= f.text_field :url, placeholder: 'お店のURL', class: "py-2 my-2 w-100" %>
-  <%= f.submit 'お店を追加' %>
+  <%= f.submit 'お店を編集' %>
 <% end %>
