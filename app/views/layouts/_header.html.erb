@@ -3,7 +3,10 @@
     <div class="col-4"></div>
     <h6 class="col-4 text-center">アルカナ</h6>
     <% if user_signed_in? %>
-      <div class="col-4 text-center"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "text-white" %></div>
+      <div class="col-4 text-center">
+        <small><%= current_user.name %></small>
+        <div><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "text-white" %></div>
+      </div>
     <% end %>
   </div>
 </div>
