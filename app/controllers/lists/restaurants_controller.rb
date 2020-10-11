@@ -6,6 +6,7 @@ class Lists::RestaurantsController < ApplicationController
   end
 
   def new
+    @results = Restaurant.get_info_from_api(params[:name]) if params.has_key?(:name)
     @restaurant = @list.restaurants.build
   end
 
