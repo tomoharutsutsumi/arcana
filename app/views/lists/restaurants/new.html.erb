@@ -10,11 +10,13 @@
 
 <% if @results %>
   <% @results.each do |r| %>
+    <%#= image_tag r['logo_image'] %>
     <%= r['name'] %>
     <%= r['genre']['catch'] %>
     <%= r['address'] %>
     <%= r['budget']['name'] %>
     <%= r['urls']['pc'] %>
+    <%= link_to '登録する', list_restaurants_path(@list, restaurant: r), method: :post %>
   <% end %>
 <% end %>
 
