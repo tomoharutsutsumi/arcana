@@ -18,7 +18,7 @@ class Lists::RestaurantsController < ApplicationController
       url: params[:restaurant][:urls][:pc],
     ))
     @restaurant.save
-    redirect_to new_list_restaurant_path(@list)
+    redirect_to new_list_restaurant_path(@list), notice: 'お店を登録しました'
   end
 
   private

@@ -12,6 +12,9 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-success" role="alert"><%= value %></div>
+    <% end %>
     <main class="mx-auto min-vh-100 bottom-height" style="width: 90%;">
       <%= yield %>
     </main>
