@@ -9,6 +9,6 @@ class Restaurant < ApplicationRecord
     request_url = URI.parse(request_url)
     results = Net::HTTP.get(request_url)
     results = JSON.parse(results)
-   　results = results['rest']
+    results = results['rest']
   end
 end
