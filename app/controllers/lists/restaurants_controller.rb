@@ -6,16 +6,20 @@ class Lists::RestaurantsController < ApplicationController
   end
 
   def new
-    @results = Restaurant.get_info_from_api(params[:name]) if params.has_key?(:name)
+    @searched = params.has_key?(:name)
+    if @searched
+      @results = Restaurant.get_info_from_api(params[:name])
+      @restaurant = @list.restaurants.build if !@results
+    end
   end
 
   def create
     @restaurant = @list.restaurants.build(restaurant_params.merge(
       name: params[:restaurant][:name],
-      price: params[:restaurant][:budget][:name],
+      price: params[:restaurant][:budget],
       place: params[:restaurant][:address],
-      category: params[:restaurant][:genre][:catch],
-      url: params[:restaurant][:urls][:pc],
+      category: params[:restaurant][:category],
+      url: params[:restaurant][:url],
     ))
     @restaurant.save
     redirect_to new_list_restaurant_path(@list), notice: 'お店を登録しました'
