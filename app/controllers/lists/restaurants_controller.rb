@@ -9,7 +9,7 @@ class Lists::RestaurantsController < ApplicationController
     @searched = params.has_key?(:name)
     if @searched
       @results = Restaurant.get_info_from_api(params[:name], params[:katakana])
-      @restaurant = @list.restaurants.build if !@results
+      @restaurant = @list.restaurants.build
     end
   end
 

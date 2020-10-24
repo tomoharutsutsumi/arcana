@@ -35,7 +35,11 @@
   <% end %>
 <% elsif @searched && !@results %>
   <div class="mt-3">該当するお店が見つかりませんでした。</div>
-  <div class="mt-5">お店が見つかりませんでしたか？カタカナ検索もお試しください。</div>
+<% end %>
+
+<% if @searched %>
+  <div class="mt-5"><hr></div>
+  <div>お店が見つかりませんでしたか？カタカナ検索もお試しください。</div>
   <div>それでも無い場合、下のフォームから登録することができます。</div>
   <%= form_with model: @restaurant, url: list_restaurants_path, local: true, class: "text-center mt-3" do |f| %>
     <p><%= f.text_field :name, placeholder: '店名', class: "w-75 p-2" %></p>
