@@ -26,6 +26,7 @@
           <div>・カテゴリ</div>
           <div>・場所</div>
           <div>・予算</div>
+          <div>・電話番号</div>
           <div>・おすすめコース</div>
           <div>・同行者</div>
           <div>・コメント</div>
@@ -35,6 +36,7 @@
           <div><%= r.category&.truncate(7) %></div>
           <div><%= r.place&.truncate(7) %></div>
           <div><%= r.price %>円</div>
+          <div><%= link_to r.tel, "tel:#{r.tel}" %></div>
           <div><%= r.recommended_menu&.truncate(7) %></div>
           <div><%= r.participant&.truncate(7) %></div>
           <div><%= r.comment&.truncate(7) %></div>

@@ -27,6 +27,8 @@
           <%= r['category'] %>
           <div class="font-weight-bold">予算</div>
           <%= (r['budget']).present? ? (r['budget']).to_s + '円' : 'なし' %>
+          <div class="font-weight-bold">電話番号</div>
+          <%= r['tel'] %>
           <div class="font-weight-bold">URL</div>
           <%= link_to 'お店のURL', "#{r['url']}", target: '_blank' %>
         </div>
@@ -46,6 +48,7 @@
     <p><%= f.text_field :address, placeholder: '住所', class: "w-75 p-2" %></p>
     <p><%= f.text_field :category, placeholder: 'カテゴリ', class: "w-75 p-2" %></p>
     <p><%= f.number_field :budget, placeholder: '予算', class: "w-75 p-2" %></p>
+    <p><%= f.text_field :tel, placeholder: '電話番号', class: "w-75 p-2" %></p>
     <p><%= f.text_field :url, placeholder: 'URL', class: "w-75 p-2" %></p>
     <p><%= f.submit '登録する' %></p>
   <% end %>
