@@ -4,6 +4,9 @@
     <% @lists.each do |l| %>
       <%= link_to(list_restaurants_path(l), class: "text-dark") do %>
         <div class="card my-2">
+          <div class="card-header">
+            <%= link_to '削除', user_list_path(current_user, l), data: { confirm: "リスト内のお店も削除されます。本当によろしいですか?" }, method: :delete, class: "float-right" %>
+          </div>
           <div class="card-body row">
             <div class="col-8"><%= l.title %></div>
             <div class="col-4">店の数<br><%= l.restaurants.size %></div>
