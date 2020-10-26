@@ -1,0 +1,5 @@
+<h4>リストを編集する</h4>
+<%= form_with model: @list, url: user_list_path, local: true, class: "text-center mt-5" do |f| %>
+  <%= f.text_field :title, placeholder: 'リスト名' %>
+  <%= f.submit '編集' %>
+<% end %>

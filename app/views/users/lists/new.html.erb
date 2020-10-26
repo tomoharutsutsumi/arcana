@@ -1,4 +1,5 @@
+<h4>リストを登録する</h4>
 <%= form_with model: @list, url: user_lists_path, local: true, class: "text-center mt-5" do |f| %>
   <%= f.text_field :title, placeholder: 'リスト名' %>
-  <%= f.submit '追加' %>
+  <%= f.submit '登録' %>
 <% end %>

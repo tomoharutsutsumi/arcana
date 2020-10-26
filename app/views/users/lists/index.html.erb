@@ -2,17 +2,18 @@
   <div class="text-right mb-3"><%= link_to '+リスト追加', new_user_list_path(current_user) %></div>  
   <% if @lists.present? %>
     <% @lists.each do |l| %>
-      <%= link_to(list_restaurants_path(l), class: "text-dark") do %>
-        <div class="card my-2">
-          <div class="card-header">
-            <%= link_to '削除', user_list_path(current_user, l), data: { confirm: "リスト内のお店も削除されます。本当によろしいですか?" }, method: :delete, class: "float-right" %>
-          </div>
+      <div class="card my-2">
+        <div class="card-header d-flex justify-content-end">
+          <%= link_to '編集', edit_user_list_path(current_user, l), class: "mr-2" %>
+          <%= link_to '削除', user_list_path(current_user, l), data: { confirm: "リスト内のお店も削除されます。本当によろしいですか?" }, method: :delete %>
+        </div>
+        <%= link_to(list_restaurants_path(l), class: "text-dark") do %>
           <div class="card-body row">
             <div class="col-8"><%= l.title %></div>
             <div class="col-4">店の数<br><%= l.restaurants.size %></div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
   <% else %>
     <div class="text-center">Myリストがまだ追加されていません</div>

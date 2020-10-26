@@ -15,6 +15,16 @@ class Users::ListsController < ApplicationController
     redirect_to user_lists_path(current_user), notice: 'リストを登録しました'
   end
 
+  def edit
+    @list = List.find(params[:id])
+  end
+
+  def update
+    @list = List.find(params[:id])
+    @list.update(list_params)
+    redirect_to user_lists_path(current_user), notice: 'リストを編集しました'
+  end
+
   def destroy
     list = List.find(params[:id])
     list.destroy
