@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_26_100734) do
+ActiveRecord::Schema.define(version: 2020_10_29_122711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(version: 2020_10_26_100734) do
     t.string "place"
     t.string "recommended_menu"
     t.string "tel"
+    t.string "opentime"
+    t.string "holiday"
+    t.string "combined_access"
+    t.string "line"
+    t.string "station"
+    t.string "station_exit"
+    t.integer "walk"
     t.index ["list_id"], name: "index_restaurants_on_list_id"
   end
 
