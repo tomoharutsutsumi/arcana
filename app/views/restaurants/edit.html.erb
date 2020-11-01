@@ -1,11 +1,20 @@
 <%= form_with model: @restaurant, url: restaurant_path(@restaurant), local: true, method: :patch, class: "text-center" do |f| %>
   <%= f.text_field :name, placeholder: '店名', class: "py-2 my-2 w-100" %>
+  <%= f.text_field :address, placeholder: '住所', class: "w-75 py-2 my-2 w-100" %>
   <%= f.text_field :category, placeholder: 'カテゴリ', class: "py-2 my-2 w-100" %>
   <%= f.text_field :place, placeholder: '場所', class: "py-2 my-2 w-100" %>
   <%= f.number_field :price, placeholder: '予算', class: "py-2 my-2 w-100" %>
+  <%= f.text_field :tel, placeholder: '電話番号', class: "w-75 py-2 my-2 w-100" %>
+  <% if @restaurant.combined_access.present? %>
+    <%= f.text_field :combined_access, placeholder: 'アクセス', class: "w-75 py-2 my-2 w-100" %>
+  <% else %>
+    <%= f.text_field :combined_access, placeholder: 'アクセス', value: restaurant_access(@restaurant), class: "w-75 py-2 my-2 w-100" %>
+  <% end %>
+  <%= f.text_field :opentime, placeholder: '営業時間', class: "w-75 py-2 my-2 w-100" %>
+  <%= f.text_field :holiday, placeholder: '定休日', class: "w-75 py-2 my-2 w-100" %>
   <%= f.text_field :recommended_menu, placeholder: 'おすすめコース', class: "py-2 my-2 w-100" %>
   <%= f.text_field :participant, placeholder: 'どのような人と行きましたか', class: "py-2 my-2 w-100" %>
   <%= f.text_area :comment, rows: 10, placeholder: 'コメント', class: "py-2 my-2 w-100" %>
-  <%= f.text_field :url, placeholder: 'お店のURL', class: "py-2 my-2 w-100" %>
+  <%= f.text_field :url, placeholder: 'URL', class: "py-2 my-2 w-100" %>
   <%= f.submit 'お店を編集' %>
 <% end %>

@@ -26,18 +26,26 @@
           <div>・カテゴリ</div>
           <div>・場所</div>
           <div>・予算</div>
+          <div>・電話番号</div>
+          <div>・アクセス</div>
+          <div>・営業時間</div>
+          <div>・定休日</div>
           <div>・おすすめコース</div>
           <div>・同行者</div>
           <div>・コメント</div>
         </div>
         <div class="col-6">
-          <div><%= r.name&.truncate(7) %></div>
-          <div><%= r.category&.truncate(7) %></div>
-          <div><%= r.place&.truncate(7) %></div>
-          <div><%= r.price %>円</div>
-          <div><%= r.recommended_menu&.truncate(7) %></div>
-          <div><%= r.participant&.truncate(7) %></div>
-          <div><%= r.comment&.truncate(7) %></div>
+          <div><%= r.name.present? ? r.name.truncate(7) : '未登録' %></div>
+          <div><%= r.category.present? ? r.category.truncate(7) : '未登録' %></div>
+          <div><%= r.place.present? ? r.place.truncate(7) : '未登録' %></div>
+          <div><%= r.price.present? ? r.price.to_s + '円' : '未登録' %></div>
+          <div><%= r.tel.present? ? link_to(r.tel, "tel:#{r.tel}") : '未登録' %></div>
+          <div><%= restaurant_access(r)&.truncate(7) %></div>
+          <div><%= r.opentime.present? ? r.opentime.truncate(7) : '未登録' %></div>
+          <div><%= r.holiday.present? ? r.holiday.truncate(7) : '未登録' %></div>
+          <div><%= r.recommended_menu.present? ? r.recommended_menu.truncate(7) : '未登録' %></div>
+          <div><%= r.participant.present? ? r.participant.truncate(7) : '未登録' %></div>
+          <div><%= r.comment.present? ? r.comment.truncate(7) : '未登録' %></div>
         </div>
       </div>
     </div>
