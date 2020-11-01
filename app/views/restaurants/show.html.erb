@@ -14,6 +14,12 @@
   <div class="font-weight-bold">アクセス</div>
   <div><%= restaurant_access(@restaurant) %></div>
   <br>
+  <div class="font-weight-bold">営業時間</div>
+  <div><%= @restaurant.opentime %></div>
+  <br>
+  <div class="font-weight-bold">定休日</div>
+  <div><%= @restaurant.holiday %></div>
+  <br>
   <div class="font-weight-bold">おすすめコース</div>
   <div><%= @restaurant.recommended_menu %></div>
   <br>
@@ -24,5 +30,5 @@
   <div><%= @restaurant.comment %></div>
   <br>
   <div class="font-weight-bold">URL</div>
-  <div><%= link_to 'お店のURL', @restaurant.url, target: '_blank' %></div>
+  <div><%= link_to "#{@restaurant.url&.truncate(30)}", @restaurant.url, target: '_blank' %></div>
 </div>
