@@ -40,7 +40,7 @@
           <div><%= r.place.present? ? r.place.truncate(7) : '未登録' %></div>
           <div><%= r.price.present? ? r.price.to_s + '円' : '未登録' %></div>
           <div><%= r.tel.present? ? link_to(r.tel, "tel:#{r.tel}") : '未登録' %></div>
-          <div><%= restaurant_access(r)&.truncate(7) %></div>
+          <div><%= restaurant_access(r).present? ? restaurant_access(r).truncate(7) : '未登録' %></div>
           <div><%= r.opentime.present? ? r.opentime.truncate(7) : '未登録' %></div>
           <div><%= r.holiday.present? ? r.holiday.truncate(7) : '未登録' %></div>
           <div><%= r.recommended_menu.present? ? r.recommended_menu.truncate(7) : '未登録' %></div>
