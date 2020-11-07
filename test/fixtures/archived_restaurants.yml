@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  archived_list: one
+  price: 1
+  comment: MyText
+  url: MyText
+  participant: MyString
+  name: MyString
+  category: MyString
+  place: MyString
+  recommended_menu: MyString
+  tel: MyString
+  opentime: MyString
+  holiday: MyString
+  combined_access: MyString
+  line: MyString
+  station: MyString
+  station_exit: MyString
+  walk: 1
+
+two:
+  archived_list: two
+  price: 1
+  comment: MyText
+  url: MyText
+  participant: MyString
+  name: MyString
+  category: MyString
+  place: MyString
+  recommended_menu: MyString
+  tel: MyString
+  opentime: MyString
+  holiday: MyString
+  combined_access: MyString
+  line: MyString
+  station: MyString
+  station_exit: MyString
+  walk: 1
