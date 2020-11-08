@@ -5,7 +5,7 @@
         <div class="card my-2">
           <div class="card-body row">
             <div class="col-8"><%= l.title %></div>
-            <div class="col-4"><%= l.user.name %></div>
+            <div class="col-4"><%= is_archived?(l) ? l.original_user_name : l.user.name %></div>
           </div>
         </div>
       <% end %>

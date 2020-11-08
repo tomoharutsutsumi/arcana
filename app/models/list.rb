@@ -14,7 +14,6 @@ class List < ApplicationRecord
   end
 
   def archive
-    user = User.find(permission_requests.sent_from_id)
-    ArchivedList.archive(user, self)
+    ArchivedList.archive(self) 
   end
 end
