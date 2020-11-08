@@ -1,0 +1,44 @@
+<div class="text-right my-4"> 
+  <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
+    <img src="https://api.gnavi.co.jp/api/img/credit/api_155_20.gif" width="155" height="20" border="0" alt="グルメ情報検索サイト　ぐるなび">
+  </a>
+</div>
+<% if @archived_restaurants.present? %>
+  <% @archived_restaurants.each do |r| %>
+    <div class="card my-3">
+      <div class="card-header d-flex justify-content-end">
+        <%= link_to '詳細', archived_list_archived_restaurant_path(r.archived_list, r), class: "mx-2" %>
+      </div>
+      <div class="card-body row">
+        <div class="col-6">
+          <div>・店名</div>
+          <div>・カテゴリ</div>
+          <div>・場所</div>
+          <div>・予算</div>
+          <div>・電話番号</div>
+          <div>・アクセス</div>
+          <div>・営業時間</div>
+          <div>・定休日</div>
+          <div>・おすすめコース</div>
+          <div>・同行者</div>
+          <div>・コメント</div>
+        </div>
+        <div class="col-6">
+          <div><%= r.name.present? ? r.name.truncate(7) : '未登録' %></div>
+          <div><%= r.category.present? ? r.category.truncate(7) : '未登録' %></div>
+          <div><%= r.place.present? ? r.place.truncate(7) : '未登録' %></div>
+          <div><%= r.price.present? ? r.price.to_s + '円' : '未登録' %></div>
+          <div><%= r.tel.present? ? link_to(r.tel, "tel:#{r.tel}") : '未登録' %></div>
+          <div><%= restaurant_access(r).present? ? restaurant_access(r).truncate(7) : '未登録' %></div>
+          <div><%= r.opentime.present? ? r.opentime.truncate(7) : '未登録' %></div>
+          <div><%= r.holiday.present? ? r.holiday.truncate(7) : '未登録' %></div>
+          <div><%= r.recommended_menu.present? ? r.recommended_menu.truncate(7) : '未登録' %></div>
+          <div><%= r.participant.present? ? r.participant.truncate(7) : '未登録' %></div>
+          <div><%= r.comment.present? ? r.comment.truncate(7) : '未登録' %></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="text-center mt-3">まだお店が登録されていません</div>
+<% end %>
