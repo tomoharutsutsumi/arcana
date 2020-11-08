@@ -26,7 +26,11 @@ class Users::ListsController < ApplicationController
 
   def destroy
     list = List.find(params[:id])
-    list.destroy
+    if list.permission_lists.present?
+      list.archive_and_destroy
+    else 
+      list.destroy
+    end
     redirect_to user_lists_path(current_user), notice: 'リストを削除しました'
   end
 

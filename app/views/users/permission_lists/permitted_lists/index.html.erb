@@ -1,7 +1,7 @@
 <div class="mt-5">
   <% if @permitted_lists.present? %>
     <% @permitted_lists.each do |l| %>
-      <%= link_to(list_restaurants_path(l), class: "text-dark") do %>
+      <%= link_to(is_archived?(l) ? archived_list_archived_restaurants_path(l) : list_restaurants_path(l), class: "text-dark") do %>
         <div class="card my-2">
           <div class="card-body row">
             <div class="col-8"><%= l.title %></div>
