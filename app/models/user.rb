@@ -14,6 +14,8 @@ class User < ApplicationRecord
                                          dependent: :destroy
   has_many :sent_from_users, through: :passive_permission_requests, source: :sent_from
   has_many :lists
+  has_many :archivings
+  has_many :archived_lists, through: :archivings
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
