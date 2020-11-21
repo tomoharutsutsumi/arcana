@@ -1,7 +1,7 @@
 class Restaurant < ApplicationRecord
   TRUE = "1"
-  FALSE = "0"
   require 'net/http'
+
   belongs_to :list
   has_many :participants
 

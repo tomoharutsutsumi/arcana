@@ -38,6 +38,7 @@ class Lists::RestaurantsController < ApplicationController
       price: params[:restaurant][:budget],
       place: params[:restaurant][:address],
       category: params[:restaurant][:category],
+      image: params[:restaurant][:image_url][:shop_image1]
     }
   end
 

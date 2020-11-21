@@ -20,6 +20,11 @@
           <%= link_to '削除', restaurant_path(r), data: { confirm: "本当によろしいですか?" }, method: :delete, class: "mx-2" %>
         <% end %>
       </div>
+      <div class="text-center my-2">
+        <% if r.image.present? %>
+          <%= image_tag r.image.to_s, size: '100' %>
+        <% end %>
+      </div>
       <div class="card-body row">
         <div class="col-6">
           <div>・店名</div>
