@@ -9,6 +9,11 @@
       <div class="card-header d-flex justify-content-end">
         <%= link_to '詳細', archived_list_archived_restaurant_path(r.archived_list, r), class: "mx-2" %>
       </div>
+      <div class="text-center my-2">
+        <% if r.image.present? %>
+          <%= image_tag r.image.to_s, size: '100' %>
+        <% end %>
+      </div>
       <div class="card-body row">
         <div class="col-6">
           <div>・店名</div>
