@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: '名前'
+    errors:
+      models:
+        user:
+          attributes:
+            email: 
+              blank: 'が空欄です'
+            password:
+              blank: 'が空欄です'
+            name:
+              blank: 'が空欄です'
+              taken: 'はすでに利用されています'

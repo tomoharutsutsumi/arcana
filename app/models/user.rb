@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :archivings
   has_many :archived_lists, through: :archivings
 
+  validates :name, presence: true
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       user.provider = auth.provider
