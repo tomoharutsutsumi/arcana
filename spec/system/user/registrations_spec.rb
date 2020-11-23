@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'user registrations', type: :system do
-  
   describe 'user registrations' do
     context 'normal' do
       it 'passes with a right user' do

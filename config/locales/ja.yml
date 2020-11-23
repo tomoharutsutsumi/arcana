@@ -3,6 +3,8 @@ ja:
     attributes:
       user:
         name: '名前'
+      list:
+        title: 'リスト名'
     errors:
       models:
         user:
@@ -14,3 +16,7 @@ ja:
             name:
               blank: 'が空欄です'
               taken: 'はすでに利用されています'
+        list:
+          attributes:
+            title:
+              blank: 'が空欄です'
