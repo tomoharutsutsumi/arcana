@@ -1,5 +1,5 @@
 <h4 class="mt-2">リストを登録する</h4>
-<%= render "devise/shared/error_messages", resource: @list %>
+<%= render "layouts/error_messages", resource: @list %>
 <%= form_with model: @list, url: user_lists_path, local: true, class: "text-center mt-5" do |f| %>
   <div class="d-flex justify-content-center">
     <div><%= f.text_field :title, placeholder: 'リスト名' %></div>
