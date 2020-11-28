@@ -1,11 +1,11 @@
 <div class="mt-5">承認したユーザーと共有するリストを選択してください</div>
 <%= form_with url: user_permission_lists_path, local: true, class: "mt-3" do |f| %>
   <% @lists.each do |l| %>
-    <div class="container my-2">
-      <div class="row">
-        <div class="col-8"><%= l.title %></div>
-        <div class="col-4"><%= f.check_box(:list_ids, { multiple: true, checked: false }, l.id, nil)  %></div>
-      </div>
+    <div class="my-2 text-center">
+      <label>
+        <%= l.title %>
+        <%= f.check_box(:list_ids, { multiple: true, checked: false }, l.id, nil)  %>
+      </label>
     </div>
   <% end %>
   <%= f.hidden_field :permission_request_id, value: @permission_request_id %>

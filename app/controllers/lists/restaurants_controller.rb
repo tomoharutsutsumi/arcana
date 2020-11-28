@@ -34,12 +34,14 @@ class Lists::RestaurantsController < ApplicationController
   end
 
   def additional_restaurant_params
-    {
+    h = {
       price: params[:restaurant][:budget],
       place: params[:restaurant][:address],
       category: params[:restaurant][:category],
-      image: params[:restaurant][:image_url][:shop_image1]
-    }
+    } 
+    if params[:restaurant][:image_url].present?
+      h.merge({ image: params[:restaurant][:image_url][:shop_image1] })
+    end
   end
 
   def access_params

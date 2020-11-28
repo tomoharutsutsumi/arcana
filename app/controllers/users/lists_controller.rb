@@ -10,8 +10,11 @@ class Users::ListsController < ApplicationController
 
   def create
     @list = current_user.lists.build(list_params)
-    @list.save
-    redirect_to user_lists_path(current_user), notice: 'リストを登録しました'
+    if @list.save
+      redirect_to user_lists_path(current_user), notice: 'リストを登録しました'
+    else
+      render 'new'
+    end
   end
 
   def edit

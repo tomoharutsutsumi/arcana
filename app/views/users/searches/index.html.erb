@@ -27,7 +27,7 @@
         <div class="card-footer">
           <h6>承認したリスト</h6>
           <% find_request(u.id, current_user.id).lists.each do |l| %>
-            <div><%= l.title %></div>
+            <div><%= l.title.present? ? l.title : '削除済みのリスト(承認したユーザーは閲覧可)' %></div>
           <% end %>
         </div>
       </div>

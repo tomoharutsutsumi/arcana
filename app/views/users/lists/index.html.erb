@@ -10,7 +10,7 @@
         <%= link_to(list_restaurants_path(l), class: "text-dark") do %>
           <div class="card-body row">
             <div class="col-8"><%= l.title %></div>
-            <div class="col-4">店の数<br><%= l.restaurants.size %></div>
+            <div class="col-4" id="number">店の数<br><%= l.restaurants.size %></div>
           </div>
         <% end %>
       </div>
