@@ -18,7 +18,7 @@ RSpec.describe 'manage restaurants', type: :system do
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
       expect(list.restaurants.count).to eq 1
-      expect(list.restaurants.last.name).to eq 'マクドナルド 大崎ゲートシティ店'
+      expect(list.restaurants.last.name).to eq 'マクドナルド 柏高島屋ステーションモール店'
       click_on 'Myリスト'
       expect(find('#number')).to have_content 1
     end
@@ -77,13 +77,13 @@ RSpec.describe 'manage restaurants', type: :system do
       click_on "#{list.title}"
       expect(page).to have_content('店名')
       click_on '詳細'
-      expect(page).to have_content 'マクドナルド 大崎ゲートシティ店'
+      expect(page).to have_content 'マクドナルド 柏高島屋ステーションモール店'
       expect(page).to have_content 'ハンバーガー'
-      expect(page).to have_content '〒141-0032 東京都品川区大崎1-11-1'
+      expect(page).to have_content '〒277-8550 千葉県柏市末広町1-1 柏高島屋ステーションモール'
       expect(page).to have_content '500円'
-      expect(page).to have_content 'ＪＲ大崎駅南口徒歩1分'
-      expect(page).to have_content '7:00～22:30、7:00～10:30((朝マック))'
-      expect(page).to have_content '無'
+      expect(page).to have_content 'ＪＲ常磐線柏駅西口徒歩1分'
+      expect(page).to have_content '5:00～23:00、5:00～10:30((朝マック))'
+      expect(page).to have_content '不定休日あり ※テナント休業日に準ずる'
       expect(page).to have_content 'おすすめコース'
       expect(page).to have_content '同行者'
       expect(page).to have_content 'コメント'
