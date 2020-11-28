@@ -6,6 +6,13 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.5.0-stretch-node
+        environment:
+          RAILS_ENV: test
+          POSTGRES_HOST: 127.0.0.1
+      - image: circle/postgres:12.1
+        environment:
+          POSTGRES_USER: arcana
+          POSTGRES_DB: arcana_test
     executor: ruby/default
     steps:
       - checkout
@@ -13,6 +20,8 @@ jobs:
           name: Which bundler?
           command: bundle -v
       - ruby/bundle-install
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:schema:load
       - run:
           name: Rspec
           command: bundle exec rspec
