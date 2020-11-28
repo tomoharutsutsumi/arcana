@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'manage restaurant', type: :system do
+RSpec.describe 'manage restaurants', type: :system do
   let!(:user) { create(:user) }
   let!(:list) { create(:list, user: user) }
 

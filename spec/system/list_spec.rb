@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'manage list', type: :system do
+RSpec.describe 'manage lists', type: :system do
   let!(:user) { create(:user) }
 
   describe 'normal' do
