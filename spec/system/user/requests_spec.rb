@@ -50,6 +50,12 @@ RSpec.describe 'manage requests', type: :system do
       expect(PermissionList.last.permission_request_id). to eq PermissionRequest.last.id
       expect(PermissionList.first.list.title). to eq 'list1'
       expect(PermissionList.last.list.title). to eq 'list2'
+      click_on 'ログアウト'
+      sign_in_as(user)
+      click_on 'リスト一覧'
+      expect(page).to have_content('list1')
+      expect(page).to have_content('list2')
+      expect(page).not_to have_content('list3')
     end
 
     it 'can be send through searching and can be rejected' do
@@ -76,6 +82,12 @@ RSpec.describe 'manage requests', type: :system do
       expect(page).to have_content('John Doe')
       click_on '非承認'
       expect(PermissionRequest.last.status).to eq PermissionRequest::REJECTED
+      click_on 'ログアウト'
+      sign_in_as(user)
+      click_on 'リスト一覧'
+      expect(page).not_to have_content('list1')
+      expect(page).not_to have_content('list2')
+      expect(page).not_to have_content('list3')
     end
   end
 
