@@ -13,6 +13,24 @@ RSpec.describe 'user registrations', type: :system do
         click_on 'commit'
         expect(page).to have_content('アカウント登録が完了しました')
       end
+
+      it 'can be registered with facebook' do
+        OmniAuth.config.mock_auth[:facebook] = nil
+        Rails.application.env_config['omniauth.auth'] = facebook_mock
+        visit root_path
+        click_link "Facebookでログイン"
+        expect(page).to have_content('Myリスト')
+        expect(User.last.name).to eq 'mockuser'
+      end
+
+      it "won't increase when a registered user logs in" do
+        OmniAuth.config.mock_auth[:facebook] = nil
+        Rails.application.env_config['omniauth.auth'] = facebook_mock
+        visit root_path
+        click_link "Facebookでログイン"
+        click_link "ログアウト"
+        expect{ click_link "Facebookでログイン" }.not_to change(User, :count)
+      end
     end
 
     context 'abnormal' do

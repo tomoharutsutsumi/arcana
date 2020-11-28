@@ -52,7 +52,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(user.lists.count).to eq 0
     end
 
-    it 'can be deleted although it is allowed to be seen from someone',type: :doing do
+    it 'can be deleted although it is allowed to be seen from someone' do
       # lists and restaurants are added
       expect(page).to have_content('Myリストがまだ追加されていません')
       click_on '+リスト追加'
