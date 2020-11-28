@@ -9,7 +9,7 @@ jobs:
         environment:
           RAILS_ENV: test
           POSTGRES_HOST: 127.0.0.1
-      - image: circle/postgres:12
+      - image: circle/postgres:12-postgis-ram
         environment:
           POSTGRES_USER: arcana
           POSTGRES_DB: arcana_test
