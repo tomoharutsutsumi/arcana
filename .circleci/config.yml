@@ -21,6 +21,9 @@ jobs:
           name: Which bundler?
           command: bundle -v
       - ruby/bundle-install
+      - run:
+            name: DBの起動を待つ
+            command: dockerize -wait tcp://127.0.0.1:5432 -timeout 120s
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
       - run:
