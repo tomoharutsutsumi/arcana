@@ -49,10 +49,10 @@ class Lists::RestaurantsController < ApplicationController
       { combined_access: params[:restaurant][:combined_access] }
     else
       { 
-        # line: params[:restaurant][:access][:line],
-        # station: params[:restaurant][:access][:station],
-        # station_exit: params[:restaurant][:access][:station_exit],
-        # walk: params[:restaurant][:access][:walk] 
+        line: params[:restaurant][:access][:line],
+        station: params[:restaurant][:access][:station],
+        station_exit: params[:restaurant][:access][:station_exit],
+        walk: params[:restaurant][:access][:walk] 
       }
     end
   end
