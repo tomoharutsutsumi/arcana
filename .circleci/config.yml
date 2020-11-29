@@ -9,6 +9,7 @@ jobs:
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
+          PGUSER: postgres
       - image: circleci/postgres:12-postgis-ram
         environment:
           POSTGRES_USER: arcana
