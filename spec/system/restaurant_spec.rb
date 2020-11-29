@@ -13,12 +13,12 @@ RSpec.describe 'manage restaurants', type: :system do
       click_on "#{list.title}"
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'マクドナルド'
+      fill_in 'name', with: 'もぅあしびー'
       click_on 'commit'
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
       expect(list.restaurants.count).to eq 1
-      expect(list.restaurants.last.name).to eq 'マクドナルド 柏高島屋ステーションモール店'
+      expect(list.restaurants.last.name).to eq 'もぅあしびー'
       click_on 'Myリスト'
       expect(find('#number')).to have_content 1
     end
@@ -69,7 +69,7 @@ RSpec.describe 'manage restaurants', type: :system do
       click_on "#{list.title}"
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'マクドナルド'
+      fill_in 'name', with: 'もぅあしびー'
       click_on 'commit'
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
@@ -77,13 +77,13 @@ RSpec.describe 'manage restaurants', type: :system do
       click_on "#{list.title}"
       expect(page).to have_content('店名')
       click_on '詳細'
-      expect(page).to have_content 'マクドナルド 柏高島屋ステーションモール店'
-      expect(page).to have_content 'ハンバーガー'
-      expect(page).to have_content '〒277-8550 千葉県柏市末広町1-1 柏高島屋ステーションモール'
-      expect(page).to have_content '500円'
-      expect(page).to have_content 'ＪＲ常磐線柏駅西口徒歩1分'
-      expect(page).to have_content '5:00～23:00、5:00～10:30((朝マック))'
-      expect(page).to have_content '不定休日あり ※テナント休業日に準ずる'
+      expect(page).to have_content 'もぅあしびー'
+      expect(page).to have_content '沖縄料理と活魚と泡盛'
+      expect(page).to have_content '〒900-0015 沖縄県那覇市久茂地2-12-24'
+      expect(page).to have_content '3000円'
+      expect(page).to have_content 'ゆいレール美栄橋駅徒歩3分'
+      expect(page).to have_content 'ランチ：11:30～14:00(L.O.13:30)、ディナー：17:00～24:00(L.O.23:00、ドリンクL.O.23:30)(※当面の間、17:00～22:00（L.O.21:00）にて営業いたしております。)'
+      expect(page).to have_content '不定休日あり'
       expect(page).to have_content 'おすすめコース'
       expect(page).to have_content '同行者'
       expect(page).to have_content 'コメント'

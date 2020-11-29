@@ -72,7 +72,7 @@ RSpec.describe 'manage lists', type: :system do
       click_on 'list1'
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'マクドナルド'
+      fill_in 'name', with: 'もぅあしびー'
       click_on 'commit'
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
@@ -130,7 +130,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('削除しました')
       expect(user.lists.count).to eq 1
       expect(ArchivedList.last.title).to eq 'list1'
-      expect(ArchivedList.last.archived_restaurants.first.name).to eq 'マクドナルド 柏高島屋ステーションモール店'
+      expect(ArchivedList.last.archived_restaurants.first.name).to eq 'もぅあしびー'
       expect(ArchivedList.last.archived_restaurants.last.name).to eq 'IL Brio'
       expect(Archiving.last.user_id).to eq other_user.id
 
@@ -141,7 +141,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('list1')
       expect(page).to have_content('list2')
       click_on 'list1'
-      expect(page).to have_content('マクド')
+      expect(page).to have_content('もぅあしびー')
       expect(page).to have_content('IL Brio')
     end
 
