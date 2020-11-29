@@ -75,7 +75,6 @@ RSpec.describe 'manage lists', type: :system do
       fill_in 'name', with: 'もぅあしびー'
       click_on 'commit'
       click_on '登録する', match: :first 
-      sleep 3
       expect(page).to have_content('お店を登録しました')
       check 'katakana'
       fill_in 'name', with: 'イルブリオ'
