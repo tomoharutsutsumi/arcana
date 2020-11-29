@@ -15,8 +15,22 @@ jobs:
           POSTGRES_DB: arcana_test
           POSTGRES_PASSWORD: <%= ENV['ARCANA_DATABASE_PASSWORD'] %>
     executor: ruby/default
+    working_directory: ~/arcana
     steps:
       - checkout
+      - restore_cache:
+            keys:
+              - v1-dependencies-{{ checksum "Gemfile.lock" }}
+              - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+            key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            paths:
+              - ./vendor/bundle
       - run:
           name: Which bundler?
           command: bundle -v
