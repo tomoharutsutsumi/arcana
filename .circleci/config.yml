@@ -13,6 +13,7 @@ jobs:
         environment:
           POSTGRES_USER: arcana
           POSTGRES_DB: arcana_test
+          POSTGRES_PASSWORD: ''
     executor: ruby/default
     steps:
       - checkout
