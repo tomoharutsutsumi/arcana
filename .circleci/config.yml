@@ -49,5 +49,9 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
       - run:
+          name: Setup Path
+          command: |
+            echo 'export GURUNAVI_API_KEY="${GURUNAVI_API_KEY}"' >> $BASH_ENV
+      - run:
           name: Rspec
           command: bundle exec rspec
