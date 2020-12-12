@@ -8,36 +8,35 @@
 <% if @restaurants.present? %>
   <% @restaurants.each do |r| %>
     <div class="card my-3">
-      <div class="card-header d-flex justify-content-end" style="height: 2.1rem">
+      <div class="card-header d-flex justify-content-end" style="height: 30px">
         <% if @list.user.id == current_user.id %>
         <div class="d-flex align-items-center">
-          <div class="ml-1" style="font-size: 1.3rem"><%= fa_icon "edit" %></div>
-          <%# <i class="fa_icon fa-edit"></i> %>
-          <%= link_to '詳細', restaurant_path(r), class: "mx-2" %>
-          <div class="ml-2" style="font-size: 1.3rem"><%= fa_icon "trash" %></div>
-          <%#= link_to '編集', edit_restaurant_path(r), class: "mx-2" %>
-          <%#= link_to '削除', restaurant_path(r), data: { confirm: "本当によろしいですか?" }, method: :delete, class: "mx-2" %>
+          <%= link_to(edit_restaurant_path(r), class: "mr-2") do %>
+            <div class="ml-1 text-dark" style="font-size: 1.5rem"><%= fa_icon "edit" %></div>
+          <% end %>
+          <%= link_to(restaurant_path(r), data: { confirm: "本当によろしいですか?" }, method: :delete, class: "mr-2") do %>
+            <div class="ml-2 text-dark" style="font-size: 1.4rem"><%= fa_icon "trash" %></div>
+          <% end %>
         </div>
         <% end %>
       </div>
-      <div class="text-left ml-3 mt-2 font-weight-bold"><%= r.name.present? ? r.name.truncate(20) : '未登録' %></div>
-      <div class="ml-3 text-secondary" style="font-size: 0.7rem"><%= r.category.present? ? r.category.truncate(15) : '未登録' %></div>
-      <div class="text-center my-2">
-        <% if r.image.present? %>
-          <%= image_tag r.image.to_s, size: '103' %>
-          <%= image_tag r.image.to_s, size: '103' %>
-          <%= image_tag r.image.to_s, size: '103' %>
-        <% end %>
-      </div>
-      <div class="ml-3 my-1" style="font-size: 0.8rem"><%= restaurant_access(r).present? ? restaurant_access(r).truncate(20) : '未登録' %></div>
-      <div class="text-left ml-3"><%#= r.place.present? ? r.place.truncate(27) : '未登録' %></div>
-      <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.opentime.present? ? r.opentime : '未登録' %></div>
-      <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.holiday.present? ? r.holiday : '未登録' %></div>
-      <div class="border mx-2 my-2 pb-5" style="font-size: 0.8rem; padding-left: 0.5rem;"><%= r.comment.present? ? r.comment.truncate(7) : '未登録' %></div>
-      <div class="ml-5">
-        
-        
-      </div>
+      <%= link_to(restaurant_path(r), class: "text-dark") do %>
+        <div class="card-body">
+          <div class="text-left ml-3 mt-2 font-weight-bold"><%= r.name.present? ? r.name.truncate(20) : '未登録' %></div>
+          <div class="ml-3 text-secondary" style="font-size: 0.7rem"><%= r.category.present? ? r.category.truncate(15) : '未登録' %></div>
+          <div class="text-center my-2">
+            <% if r.image.present? %>
+              <%= image_tag r.image.to_s, size: '95' %>
+              <%= image_tag r.image.to_s, size: '95' %>
+              <%= image_tag r.image.to_s, size: '95' %>
+            <% end %>
+          </div>
+          <div class="ml-3 my-1" style="font-size: 0.8rem"><%= restaurant_access(r).present? ? restaurant_access(r).truncate(20) : '未登録' %></div>
+          <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.opentime.present? ? r.opentime : '未登録' %></div>
+          <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.holiday.present? ? r.holiday : '未登録' %></div>
+          <div class="border mx-2 my-2 pb-5" style="font-size: 0.8rem; padding-left: 0.5rem;"><%= r.comment.present? ? r.comment.truncate(7) : '未登録' %></div>
+        </div>
+      <% end %>
     </div>
   <% end %>
   <div class="text-right my-4"> 
