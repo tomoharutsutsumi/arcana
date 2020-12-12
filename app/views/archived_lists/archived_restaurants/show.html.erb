@@ -1,35 +1,53 @@
-<div class="ml-5 mt-3">
-  <div class="my-3"><%= image_tag @archived_restaurant.image %></div>
-  <div class="font-weight-bold">店名</div>
-  <div><%= @archived_restaurant.name %></div>
-  <br>
-  <div class="font-weight-bold">カテゴリ</div>
-  <div><%= @archived_restaurant.category %></div>
-  <br>
-  <div class="font-weight-bold">場所</div>
-  <div><%= @archived_restaurant.place %></div>
-  <br>
-  <div class="font-weight-bold">予算</div>
-  <div><%= @archived_restaurant.price %>円</div>
-  <br>
-  <div class="font-weight-bold">アクセス</div>
-  <div><%= restaurant_access(@archived_restaurant) %></div>
-  <br>
-  <div class="font-weight-bold">営業時間</div>
-  <div><%= @archived_restaurant.opentime %></div>
-  <br>
-  <div class="font-weight-bold">定休日</div>
-  <div><%= @archived_restaurant.holiday %></div>
-  <br>
-  <div class="font-weight-bold">おすすめコース</div>
-  <div><%= @archived_restaurant.recommended_menu %></div>
-  <br>
-  <div class="font-weight-bold">同行者</div>
-  <div><%= @archived_restaurant.participant %></div>
-  <br>
-  <div class="font-weight-bold">コメント</div>
-  <div><%= @archived_restaurant.comment %></div>
-  <br>
-  <div class="font-weight-bold">URL</div>
-  <div><%= link_to "#{@archived_restaurant.url&.truncate(30)}", @archived_restaurant.url, target: '_blank' %></div>
+<div class="mt-3">
+  <div class="my-3">
+    <div class="text-center">
+      <% if @archived_restaurant.image.present? %>
+        <%= image_tag @archived_restaurant.image, size: '300' %>
+      <% else %>
+        <div class="my-5">画像無し</div>
+      <% end %>
+    </div>
+  </div>
+  <table class="table">
+    <tr>
+      <td class="font-weight-bold" style="width: 100px;">店名</td>
+      <td><%= @archived_restaurant.name %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">カテゴリ</td>
+      <td><%= @archived_restaurant.category %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">場所</td>
+      <td><%= @archived_restaurant.place %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">予算</td>
+      <td><%= @archived_restaurant.price %>円</td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">アクセス</td>
+      <td><%= restaurant_access(@archived_restaurant) %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">電話番号</td>
+      <td><%= @archived_restaurant.tel.present? ? link_to(@archived_restaurant.tel, "tel:#{@archived_restaurant.tel}") : '未登録' %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">営業時間</td>
+      <td><%= @archived_restaurant.opentime %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">定休日</td>
+      <td><%= @archived_restaurant.holiday %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">URL</td>
+      <td><%= link_to "#{@archived_restaurant.url&.truncate(30)}", @archived_restaurant.url, target: '_blank' %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">コメント</td>
+      <td><%= @archived_restaurant.comment %></td>
+    </tr>
+  </table>  
 </div>

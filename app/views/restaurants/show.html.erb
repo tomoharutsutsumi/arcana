@@ -1,6 +1,12 @@
 <div class="mt-3">
   <div class="my-3">
-    <div class="text-center"><%= image_tag @restaurant.image, size: '300' %></div>
+    <div class="text-center">
+      <% if @restaurant.image.present? %>
+        <%= image_tag @restaurant.image, size: '300' %>
+      <% else %>
+        <div class="my-5">画像無し</div>
+      <% end %>
+    </div>
   </div>
   <table class="table">
     <tr>
@@ -8,7 +14,7 @@
       <td><%= @restaurant.name %></td>
     </tr>
     <tr>
-      <td class="font-weight-bold" style="width: 100px;">カテゴリ</td>
+      <td class="font-weight-bold">カテゴリ</td>
       <td><%= @restaurant.category %></td>
     </tr>
     <tr>
