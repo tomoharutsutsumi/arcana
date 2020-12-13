@@ -75,8 +75,7 @@ RSpec.describe 'manage restaurants', type: :system do
       expect(page).to have_content('お店を登録しました')
       click_on 'Myリスト'
       click_on "#{list.title}"
-      expect(page).to have_content('店名')
-      click_on '詳細'
+      click_on 'もぅあしびー'
       expect(page).to have_content 'もぅあしびー'
       expect(page).to have_content '沖縄料理と活魚と泡盛'
       expect(page).to have_content '〒900-0015 沖縄県那覇市久茂地2-12-24'
@@ -84,8 +83,6 @@ RSpec.describe 'manage restaurants', type: :system do
       expect(page).to have_content 'ゆいレール美栄橋駅徒歩3分'
       expect(page).to have_content 'ランチ：11:30～14:00(L.O.13:30)、ディナー：17:00～24:00(L.O.23:00、ドリンクL.O.23:30)(※当面の間、17:00～22:00（L.O.21:00）にて営業いたしております。)'
       expect(page).to have_content '不定休日あり'
-      expect(page).to have_content 'おすすめコース'
-      expect(page).to have_content '同行者'
       expect(page).to have_content 'コメント'
       expect(page).to have_content 'URL'
     end
@@ -100,8 +97,7 @@ RSpec.describe 'manage restaurants', type: :system do
       expect(page).to have_content('お店を登録しました')
       click_on 'Myリスト'
       click_on "#{list.title}"
-      expect(page).to have_content('店名')
-      click_on '編集'
+      find('.fa-edit').click
       fill_in 'restaurant[name]', with: ''
       fill_in 'restaurant[name]', with: '編集されたマクドナルド'
       click_on 'お店を編集'
@@ -119,8 +115,7 @@ RSpec.describe 'manage restaurants', type: :system do
       expect(page).to have_content('お店を登録しました')
       click_on 'Myリスト'
       click_on "#{list.title}"
-      expect(page).to have_content('店名')
-      click_on '削除'
+      find('.fa-trash').click
       alert = page.driver.browser.switch_to.alert
       alert.accept
       expect(page).to have_content('お店を削除しました')

@@ -7,7 +7,7 @@ class ArchivedList < ApplicationRecord
     archived_list = ArchivedList.create(title: list.title, original_user_name: list.user.name)
     list.permission_requests.each do |r|
       user = User.find(r.sent_from_id)
-      Archiving.create(user_id: user.id, archived_list_id: archived_list.id)
+      user.archivings.create(archived_list_id: archived_list.id)
     end
     ArchivedRestaurant.archive(archived_list, list)
   end

@@ -27,7 +27,7 @@ RSpec.describe 'manage lists', type: :system do
       fill_in 'list_title', with: 'list1'
       click_on 'commit'
       expect(page).to have_content('list1')
-      click_on '編集'
+      find('.fa-edit').click
       fill_in 'list_title', with: ''
       fill_in 'list_title', with: 'list2'
       click_on 'commit'
@@ -45,7 +45,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(user.lists.last.title).to eq 'list1'
       expect(page).to have_content('リストを登録しました')
       expect(page).to have_content('list1')
-      click_on '削除'
+      find('.fa-trash').click
       alert = page.driver.browser.switch_to.alert
       alert.accept
       expect(page).to have_content('リストを削除しました')
@@ -94,12 +94,13 @@ RSpec.describe 'manage lists', type: :system do
       click_on 'commit'
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
+      find('.fa-users').click
       click_on 'ログアウト'
 
       # send a request to this user
       sign_in_as(other_user)
       click_on '検索'
-      expect(page).to have_content 'ユーザー検索'
+      expect(page).to have_content '共有履歴'
       fill_in 'name', with: 'John Doe'
       click_on '検索', match: :first
       expect(page).to have_content('John Doe')
@@ -125,7 +126,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('list1')
       expect(page).to have_content('list2')
       click_on 'Myリスト'
-      click_on '削除', match: :first
+      page.all(:css, '.fa-trash')[0].click
       alert = page.driver.browser.switch_to.alert
       alert.accept
       expect(page).to have_content('削除しました')
@@ -136,6 +137,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(Archiving.last.user_id).to eq other_user.id
 
       # list and restaurants can be archived and other user can see check them out
+      find('.fa-users').click
       click_on 'ログアウト'
       sign_in_as(other_user)
       click_on('リスト一覧')
