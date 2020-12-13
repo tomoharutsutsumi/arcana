@@ -8,7 +8,7 @@
               <div><%= l.title %></div>
               <small class="text-secondary">登録数:<%= is_archived?(l) ? l.archived_restaurants.length : l.restaurants.length %></small>
             </div>
-            <div class="mr-5"><%= is_archived?(l) ? l.original_user_name : l.user.name %></div>
+            <div class="mr-5"><%= l.user&.name %></div>
           </div>
         </div>
       <% end %>
