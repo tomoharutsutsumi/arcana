@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :lists
   has_many :archivings
   has_many :archived_lists, through: :archivings
+  has_many :archiving_lists, class_name: 'ArchivedList'
 
   validates :name, presence: true
 

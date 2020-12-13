@@ -28,8 +28,8 @@
               <% find_request(u.id, current_user.id).lists.each do |l| %>
                 <div><%= l.title %></div>
               <% end %>
-            <% elsif find_archiving_lists_with_user(current_user, u).present? %>
-              <% find_archiving_lists_with_user(current_user, u).each do |l| %>
+            <% elsif @archivings.present? %>
+              <% @archivings.where(archivings: { user: u }).each do |l| %>
                 <%= l.title %>
               <% end %>
             <% end %>
