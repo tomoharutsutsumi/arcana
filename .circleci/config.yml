@@ -1,0 +1,58 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.5.0-node-browsers
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: arcana
+      - image: circleci/postgres:12-postgis-ram
+        environment:
+          POSTGRES_USER: arcana
+          POSTGRES_DB: arcana_test
+          POSTGRES_PASSWORD: <%= ENV['ARCANA_DATABASE_PASSWORD'] %>
+    executor: ruby/default
+    working_directory: ~/arcana
+    steps:
+      - checkout
+      - run:
+          name: Install Chrome
+          command: |
+            sudo apt-get install fonts-migmix
+            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+            sudo apt-get update
+            sudo apt-get install google-chrome-stable
+      - restore_cache:
+            keys:
+              - v1-dependencies-{{ checksum "Gemfile.lock" }}
+              - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.1.4
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+            key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            paths:
+              - ./vendor/bundle
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install
+      - run:
+            name: DBの起動を待つ
+            command: dockerize -wait tcp://127.0.0.1:5432 -timeout 120s
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+      - run:
+          name: Setup Path
+          command: |
+            echo 'export GURUNAVI_API_KEY="${GURUNAVI_API_KEY}"' >> $BASH_ENV
+      - run:
+          name: Rspec
+          command: bundle exec rspec

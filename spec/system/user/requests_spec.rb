@@ -15,7 +15,7 @@ RSpec.describe 'manage requests', type: :system do
     it 'can be send through searching and can be permitted' do
       expect(page).to have_content 'ログインしました'
       click_on '検索'
-      expect(page).to have_content 'ユーザー検索'
+      expect(page).to have_content '共有履歴'
       fill_in 'name', with: 'Other Person'
       click_on '検索', match: :first
       expect(page).to have_content('Other Person')
@@ -61,7 +61,7 @@ RSpec.describe 'manage requests', type: :system do
     it 'can be send through searching and can be rejected' do
       expect(page).to have_content 'ログインしました'
       click_on '検索'
-      expect(page).to have_content 'ユーザー検索'
+      expect(page).to have_content '共有履歴'
       fill_in 'name', with: 'Other Person'
       click_on '検索', match: :first
       expect(page).to have_content('Other Person')
