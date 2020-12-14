@@ -26,15 +26,13 @@
           <div class="ml-3 text-secondary" style="font-size: 0.7rem"><%= r.category.present? ? r.category.truncate(15) : '未登録' %></div>
           <div class="text-center my-2">
             <% if r.image.present? %>
-              <%= image_tag r.image.to_s, size: '95' %>
-              <%= image_tag r.image.to_s, size: '95' %>
-              <%= image_tag r.image.to_s, size: '95' %>
+              <%= image_tag r.image.to_s, size: '150' %>
             <% end %>
           </div>
           <div class="ml-3 my-1" style="font-size: 0.8rem"><%= restaurant_access(r).present? ? restaurant_access(r).truncate(20) : '未登録' %></div>
           <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.opentime.present? ? r.opentime : '未登録' %></div>
           <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.holiday.present? ? r.holiday : '未登録' %></div>
-          <div class="border mx-2 my-2 pb-5" style="font-size: 0.8rem; padding-left: 0.5rem;"><%= r.comment.present? ? r.comment.truncate(7) : '未登録' %></div>
+          <div class="border mx-2 my-2 pb-5" style="font-size: 0.8rem; padding-left: 0.5rem;"><%= r.comment.present? ? r.comment : '未登録' %></div>
         </div>
       <% end %>
     </div>
