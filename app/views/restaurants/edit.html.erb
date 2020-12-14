@@ -12,9 +12,7 @@
   <% end %>
   <%= f.text_field :opentime, placeholder: '営業時間', class: "w-75 py-2 my-2 w-100" %>
   <%= f.text_field :holiday, placeholder: '定休日', class: "w-75 py-2 my-2 w-100" %>
-  <%= f.text_field :recommended_menu, placeholder: 'おすすめコース', class: "py-2 my-2 w-100" %>
-  <%= f.text_field :participant, placeholder: 'どのような人と行きましたか', class: "py-2 my-2 w-100" %>
-  <%= f.text_area :comment, rows: 10, placeholder: 'コメント', class: "py-2 my-2 w-100" %>
   <%= f.text_field :url, placeholder: 'URL', class: "py-2 my-2 w-100" %>
+  <%= f.text_area :comment, rows: 10, placeholder: 'コメント', class: "py-2 my-2 w-100" %>
   <%= f.submit 'お店を編集' %>
 <% end %>

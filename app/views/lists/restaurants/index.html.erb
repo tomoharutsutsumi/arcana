@@ -7,7 +7,7 @@
 </div>
 <% if @restaurants.present? %>
   <% @restaurants.each do |r| %>
-    <div class="card my-3">
+    <div class="card my-3" style="text-decoration: none;">
       <div class="card-header d-flex justify-content-end" style="height: 30px">
         <% if @list.user.id == current_user.id %>
         <div class="d-flex align-items-center">
@@ -32,7 +32,7 @@
           <div class="ml-3 my-1" style="font-size: 0.8rem"><%= restaurant_access(r).present? ? restaurant_access(r).truncate(20) : '未登録' %></div>
           <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.opentime.present? ? r.opentime : '未登録' %></div>
           <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.holiday.present? ? r.holiday : '未登録' %></div>
-          <div class="border mx-2 my-2 pb-5" style="font-size: 0.8rem; padding-left: 0.5rem;"><%= r.comment.present? ? r.comment : '未登録' %></div>
+          <div class="border mx-2 my-2 pb-5" style="font-size: 0.8rem; padding-left: 0.5rem;"><%= r.comment.present? ? r.comment : 'コメント未記入' %></div>
         </div>
       <% end %>
     </div>
