@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_13_043653) do
+ActiveRecord::Schema.define(version: 2021_01_10_052506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,15 @@ ActiveRecord::Schema.define(version: 2020_12_13_043653) do
     t.index ["list_id"], name: "index_restaurants_on_list_id"
   end
 
+  create_table "share_hashes", force: :cascade do |t|
+    t.bigint "list_id"
+    t.string "hash_string", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hash_string"], name: "index_share_hashes_on_hash_string", unique: true
+    t.index ["list_id"], name: "index_share_hashes_on_list_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -135,4 +144,5 @@ ActiveRecord::Schema.define(version: 2020_12_13_043653) do
   add_foreign_key "permission_lists", "lists"
   add_foreign_key "permission_lists", "permission_requests"
   add_foreign_key "restaurants", "lists"
+  add_foreign_key "share_hashes", "lists"
 end

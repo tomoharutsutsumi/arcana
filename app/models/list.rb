@@ -3,6 +3,7 @@ class List < ApplicationRecord
   has_many :permission_lists, dependent: :destroy
   has_many :permission_requests, through: :permission_lists
   has_many :restaurants, dependent: :destroy
+  has_one :share_hash
 
   validates :title, presence: true
 

@@ -1,23 +1,37 @@
 <div class="text-right mt-3">
-  <%= 
-    link_to_if(@list.user.id == current_user.id, '+お店を登録する', new_list_restaurant_path(@list)) do 
-      ''
-    end
-  %>
+  <div>
+    <%= 
+      link_to_if(@list.user.id == current_user.id, '+お店を登録する', new_list_restaurant_path(@list)) do 
+        ''
+      end
+    %>
+  </div>
+  <div class="mt-2">
+    <%= 
+      link_to_if(@list.user.id == current_user.id && @list.share_hash.nil?, '共有リンクを発行する', list_share_hashes_path(@list), method: :post) do 
+        ''
+      end
+    %>
+  </div>
 </div>
+<% if @list.user.id == current_user.id && @list.share_hash.present? %>
+  <div>このリストの共有リンク</div>
+  <div style="font-size: 10px" id="copy-text" class="border"><%= @list.share_hash.present? ? "#{Rails.env.production? ? 'https://web-arcana.herokuapp.com' : 'http://localhost:3000'}/shared_lists/#{@list.id}?hash_string=#{@list.share_hash.hash_string}" : '未発行' %></div>
+  <button id="copy-button" class="mt-2 btn btn-secondary btn-sm">リンクのコピー</button>
+<% end %>
 <% if @restaurants.present? %>
   <% @restaurants.each do |r| %>
     <div class="card my-3" style="text-decoration: none;">
       <div class="card-header d-flex justify-content-end" style="height: 30px">
         <% if @list.user.id == current_user.id %>
-        <div class="d-flex align-items-center">
-          <%= link_to(edit_restaurant_path(r), class: "mr-2") do %>
-            <div class="ml-1 text-dark" style="font-size: 1.5rem"><%= fa_icon "edit" %></div>
-          <% end %>
-          <%= link_to(restaurant_path(r), data: { confirm: "本当によろしいですか?" }, method: :delete, class: "mr-2") do %>
-            <div class="ml-2 text-dark" style="font-size: 1.4rem"><%= fa_icon "trash" %></div>
-          <% end %>
-        </div>
+          <div class="d-flex align-items-center">
+            <%= link_to(edit_restaurant_path(r), class: "mr-2") do %>
+              <div class="ml-1 text-dark" style="font-size: 1.5rem"><%= fa_icon "edit" %></div>
+            <% end %>
+            <%= link_to(restaurant_path(r), data: { confirm: "本当によろしいですか?" }, method: :delete, class: "mr-2") do %>
+              <div class="ml-2 text-dark" style="font-size: 1.4rem"><%= fa_icon "trash" %></div>
+            <% end %>
+          </div>
         <% end %>
       </div>
       <%= link_to(restaurant_path(r), class: "text-dark") do %>
@@ -44,4 +58,15 @@
 </div>
 <% else %>
   <div class="text-center mt-3">まだお店が登録されていません</div>
+<% end %>
+
+<% if @list.user.id == current_user.id && @list.share_hash.present? %>
+  <script>
+    document.getElementById('copy-button').onclick = () => {
+      const text = document.getElementById('copy-text').textContent;
+      navigator.clipboard.writeText(text).then(e => {
+        alert('コピーできました');
+      });
+    };
+  </script>
 <% end %>
