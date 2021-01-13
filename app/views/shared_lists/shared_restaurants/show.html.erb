@@ -1,0 +1,53 @@
+<div class="mt-3">
+  <div class="my-3">
+    <div class="text-center">
+      <% if @shared_restaurant.image.present? %>
+        <%= image_tag @shared_restaurant.image, size: '300' %>
+      <% else %>
+        <div class="my-5">画像無し</div>
+      <% end %>
+    </div>
+  </div>
+  <table class="table">
+    <tr>
+      <td class="font-weight-bold" style="width: 100px;">店名</td>
+      <td><%= @shared_restaurant.name %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">カテゴリ</td>
+      <td><%= @shared_restaurant.category %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">場所</td>
+      <td><%= @shared_restaurant.place %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">予算</td>
+      <td><%= @shared_restaurant.price %>円</td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">アクセス</td>
+      <td><%= restaurant_access(@shared_restaurant) %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">電話番号</td>
+      <td><%= @shared_restaurant.tel.present? ? link_to(@shared_restaurant.tel, "tel:#{@shared_restaurant.tel}") : '未登録' %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">営業時間</td>
+      <td><%= @shared_restaurant.opentime %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">定休日</td>
+      <td><%= @shared_restaurant.holiday %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">URL</td>
+      <td><%= link_to "#{@shared_restaurant.url&.truncate(30)}", @shared_restaurant.url, target: '_blank' %></td>
+    </tr>
+    <tr>
+      <td class="font-weight-bold">コメント</td>
+      <td><%= @shared_restaurant.comment %></td>
+    </tr>
+  </table>  
+</div>

@@ -23,5 +23,7 @@ Rails.application.routes.draw do
   resources :archived_lists do
     resources :archived_restaurants, module: :archived_lists
   end
-  resources :shared_lists
+  resources :shared_lists do
+    resources :shared_restaurants, module: :shared_lists
+  end
 end

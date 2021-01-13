@@ -16,7 +16,9 @@
 </div>
 <% if @list.user.id == current_user.id && @list.share_hash.present? %>
   <div>このリストの共有リンク</div>
-  <div style="font-size: 10px" id="copy-text" class="border"><%= @list.share_hash.present? ? "#{Rails.env.production? ? 'https://web-arcana.herokuapp.com' : 'http://localhost:3000'}/shared_lists/#{@list.id}?hash_string=#{@list.share_hash.hash_string}" : '未発行' %></div>
+  <div>
+    <textarea style="font-size: 10px" id="copy-text" class="border"><%= @list.share_hash.present? ? "#{Rails.env.production? ? 'https://web-arcana.herokuapp.com' : 'http://localhost:3000'}/shared_lists/#{@list.id}?hash_string=#{@list.share_hash.hash_string}" : '未発行' %></textarea>
+  </div>
   <button id="copy-button" class="mt-2 btn btn-secondary btn-sm">リンクのコピー</button>
 <% end %>
 <% if @restaurants.present? %>
@@ -63,10 +65,15 @@
 <% if @list.user.id == current_user.id && @list.share_hash.present? %>
   <script>
     document.getElementById('copy-button').onclick = () => {
-      const text = document.getElementById('copy-text').textContent;
-      navigator.clipboard.writeText(text).then(e => {
-        alert('コピーできました');
-      });
+      // const text = document.getElementById("copy-text");
+      // const range = document.createRange();
+      // range.selectNode(text);
+      // window.getSelection().addRange(range);
+      // document.execCommand('copy');
+      const copy_text = document.querySelector("#copy-text");
+      copy_text.select();
+      document.execCommand("copy");
+      alert("コピーしました。");
     };
   </script>
 <% end %>
