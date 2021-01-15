@@ -26,3 +26,10 @@
 <% else %>
   <div class="text-center mt-3">まだお店が登録されていません</div>
 <% end %>
+<% if current_user.nil? %>
+  <div class="text-center mt-3">
+    <%= link_to '自分のリストとして登録', new_user_registration_path(hash_string: @list.share_hash.hash_string) %>
+  </div>
+<%# <% else %>
+  <%#= link_to '自分のリストとして登録', new_user_registration_path(hash_string: @list.share_hash.hash_string) %>
+<% end %>

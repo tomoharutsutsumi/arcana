@@ -5,14 +5,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    session[:hash_string] = params[:hash_string] if params.has_key?(:hash_string)
+    super
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+     # should be in a module
+    if session[:hash_string].present?
+      list = ShareHash.find_by(hash_string: session[:hash_string]).list
+      request = PermissionRequest.create(sent_from_id: current_user.id, sent_to_id: list.user.id,  status: PermissionRequest::PERMITTED)
+      PermissionList.create(list: list, permission_request: request)
+      session[:hash_string].clear
+    end
+    
+  end
 
   # GET /resource/edit
   # def edit
