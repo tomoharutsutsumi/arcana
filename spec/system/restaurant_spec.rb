@@ -81,7 +81,7 @@ RSpec.describe 'manage restaurants', type: :system do
       expect(page).to have_content '〒900-0015 沖縄県那覇市久茂地2-12-24'
       expect(page).to have_content '3000円'
       expect(page).to have_content 'ゆいレール美栄橋駅徒歩3分'
-      expect(page).to have_content 'ランチ：11:30～14:00(L.O.13:30)、ディナー：17:00～24:00(L.O.23:00、ドリンクL.O.23:30)(※当面の間、17:00～22:00（L.O.21:00）にて営業いたしております。)'
+      expect(page).to have_content 'ランチ：11:30～14:00(L.O.13:3'
       expect(page).to have_content '不定休日あり'
       expect(page).to have_content 'コメント'
       expect(page).to have_content 'URL'
