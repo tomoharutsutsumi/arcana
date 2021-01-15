@@ -12,15 +12,34 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    build_resource(sign_up_params)
+
+    resource.save
      # should be in a module
     if session[:hash_string].present?
       list = ShareHash.find_by(hash_string: session[:hash_string]).list
-      request = PermissionRequest.create(sent_from_id: current_user.id, sent_to_id: list.user.id,  status: PermissionRequest::PERMITTED)
+      p resource
+      p list.user
+      request = PermissionRequest.create(sent_from_id: resource.id, sent_to_id: list.user.id,  status: PermissionRequest::PERMITTED)
       PermissionList.create(list: list, permission_request: request)
       session[:hash_string].clear
     end
-    
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end
   end
 
   # GET /resource/edit
