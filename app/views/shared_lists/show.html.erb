@@ -1,0 +1,35 @@
+<% if @list.restaurants.present? %>
+  <% @list.restaurants.each do |r| %>
+    <div class="card my-3">
+      <%= link_to(shared_list_shared_restaurant_path(@list, r, hash_string: @list.share_hash.hash_string), class: "text-dark") do %>
+        <div class="card-body">
+          <div class="text-left ml-3 mt-2 font-weight-bold"><%= r.name.present? ? r.name.truncate(20) : '未登録' %></div>
+          <div class="ml-3 text-secondary" style="font-size: 0.7rem"><%= r.category.present? ? r.category.truncate(15) : '未登録' %></div>
+          <div class="text-center my-2">
+            <% if r.image.present? %>
+              <%= image_tag r.image.to_s, size: '95' %>
+            <% end %>
+          </div>
+          <div class="ml-3 my-1" style="font-size: 0.8rem"><%= restaurant_access(r).present? ? restaurant_access(r).truncate(20) : '未登録' %></div>
+          <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.opentime.present? ? r.opentime : '未登録' %></div>
+          <div class="text-left ml-3" style="font-size: 0.8rem"><%= r.holiday.present? ? r.holiday : '未登録' %></div>
+          <div class="border mx-2 my-2 pb-5" style="font-size: 0.8rem; padding-left: 0.5rem;"><%= r.comment.present? ? r.comment : 'コメント未記入' %></div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="text-right my-4"> 
+  <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">
+    <img src="https://api.gnavi.co.jp/api/img/credit/api_155_20.gif" width="155" height="20" border="0" alt="グルメ情報検索サイト　ぐるなび">
+  </a>
+</div>
+<% else %>
+  <div class="text-center mt-3">まだお店が登録されていません</div>
+<% end %>
+<% if current_user.nil? %>
+  <div class="text-center mt-3">
+    <%= link_to '自分のリストとして登録', new_user_registration_path(hash_string: @list.share_hash.hash_string) %>
+  </div>
+<%# <% else %>
+  <%#= link_to '自分のリストとして登録', new_user_registration_path(hash_string: @list.share_hash.hash_string) %>
+<% end %>
