@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  include RegisterWithSharedList
   # before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
@@ -13,15 +14,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-
     resource.save
-     # should be in a module
-    if session[:hash_string].present?
-      list = ShareHash.find_by(hash_string: session[:hash_string]).list
-      request = PermissionRequest.create(sent_from_id: resource.id, sent_to_id: list.user.id,  status: PermissionRequest::PERMITTED)
-      PermissionList.create(list: list, permission_request: request)
-      session[:hash_string].clear
-    end
+    register_with_shared_list(resource)
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?

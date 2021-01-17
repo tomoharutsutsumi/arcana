@@ -177,7 +177,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('list11')
     end
 
-    it 'can be shared with URL and user can register through the list with normal form',type: :doing do
+    it 'can be shared with URL and user can register through the list with normal form' do
       expect(page).to have_content('Myリストがまだ追加されていません')
       click_on '+リスト追加'
       expect(page).to have_content('リストを登録する')
