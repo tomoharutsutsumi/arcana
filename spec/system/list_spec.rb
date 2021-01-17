@@ -148,6 +148,64 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('IL Brio')
     end
 
+    it 'can be shared with URL and user can register through the list with facebook' do
+      expect(page).to have_content('Myリストがまだ追加されていません')
+      click_on '+リスト追加'
+      expect(page).to have_content('リストを登録する')
+      fill_in 'list_title', with: 'list11'
+      expect{ click_on 'commit' }.to change{ user.lists.count }.by(1)
+      expect(user.lists.last.title).to eq 'list11'
+      expect(page).to have_content('リストを登録しました')
+      expect(page).to have_content('list11')
+      click_on 'list11'
+      expect(page).to have_content('共有リンクを発行する')
+      click_on '共有リンクを発行する'
+      expect(page).to have_content('共有リンクが発行されました')
+      find('.fa-users').click
+      click_on 'ログアウト'
+      OmniAuth.config.mock_auth[:facebook] = nil
+      Rails.application.env_config['omniauth.auth'] = facebook_mock
+      visit shared_list_path(user.lists.last.id, hash_string: user.lists.last.share_hash.hash_string)
+      expect(page).to have_content('まだお店が登録されていません')
+      expect(page).to have_content('自分のリストとして登録')
+      click_on '自分のリストとして登録'
+      expect(page).to have_content('新規登録')
+      click_link "Facebookでログイン"
+      expect(page).to have_content('Myリスト')
+      expect(User.last.name).to eq 'mockuser'
+      click_on 'リスト一覧'
+      expect(page).to have_content('list11')
+    end
+
+    it 'can be shared with URL and user can register through the list with normal form',type: :doing do
+      expect(page).to have_content('Myリストがまだ追加されていません')
+      click_on '+リスト追加'
+      expect(page).to have_content('リストを登録する')
+      fill_in 'list_title', with: 'list11'
+      expect{ click_on 'commit' }.to change{ user.lists.count }.by(1)
+      expect(user.lists.last.title).to eq 'list11'
+      expect(page).to have_content('リストを登録しました')
+      expect(page).to have_content('list11')
+      click_on 'list11'
+      expect(page).to have_content('共有リンクを発行する')
+      click_on '共有リンクを発行する'
+      expect(page).to have_content('共有リンクが発行されました')
+      find('.fa-users').click
+      click_on 'ログアウト'
+      visit shared_list_path(user.lists.last.id, hash_string: user.lists.last.share_hash.hash_string)
+      expect(page).to have_content('まだお店が登録されていません')
+      expect(page).to have_content('自分のリストとして登録')
+      click_on '自分のリストとして登録'
+      expect(page).to have_content('新規登録')
+      fill_in 'user_email', with: 'test@gmail.com'
+      fill_in 'user_name', with: 'test user'
+      fill_in 'user_password', with: 'password'
+      fill_in 'user_password_confirmation', with: 'password'
+      click_on 'commit'
+      expect(page).to have_content('アカウント登録が完了しました')
+      click_on 'リスト一覧'
+      expect(page).to have_content('list11')
+    end
   end
 
   describe 'abnormal' do

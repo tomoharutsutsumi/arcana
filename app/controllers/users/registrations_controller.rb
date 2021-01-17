@@ -18,8 +18,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
      # should be in a module
     if session[:hash_string].present?
       list = ShareHash.find_by(hash_string: session[:hash_string]).list
-      p resource
-      p list.user
       request = PermissionRequest.create(sent_from_id: resource.id, sent_to_id: list.user.id,  status: PermissionRequest::PERMITTED)
       PermissionList.create(list: list, permission_request: request)
       session[:hash_string].clear
