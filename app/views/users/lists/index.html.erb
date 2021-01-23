@@ -5,19 +5,31 @@
   </div>
   <% if @lists.present? %>
     <% @lists.each do |l| %>
-      <div class="card my-2">
-        <div class="card-header d-flex justify-content-end align-items-center" style="height: 30px;">
+      <div class="my-2 border-bottom">
+        <div class="d-flex justify-content-end align-items-center" style="height: 30px; margin-bottom: 5px;">
           <%= link_to(edit_user_list_path(current_user, l), class: "mr-2") do %>
             <div class="ml-1 text-dark" style="font-size: 1.5rem"><%= fa_icon "edit" %></div>
           <% end %>
           <%= link_to(user_list_path(current_user, l), data: { confirm: "リスト内のお店も削除されます。本当によろしいですか?" }, method: :delete) do %>
-            <div class="ml-2 text-dark" style="font-size: 1.4rem"><%= fa_icon "trash" %></div>
+            <div class="ml-2 text-dark" style="font-size: 1.3rem; padding-bottom: 4px;"><%= fa_icon "trash" %></div>
           <% end %>
         </div>
         <%= link_to(list_restaurants_path(l), class: "text-dark") do %>
-          <div class="card-body row" style="height: 70px;">
-            <div class="col-8"><%= l.title %></div>
-            <div class="col-4" id="number">登録数:<%= l.restaurants.size %></div>
+          <div class="row" style="height: 70px;">
+            <div class="col-3">
+              <% if l.restaurants.present? %>
+                <%= image_tag l.restaurants.first.image.to_s, size: '60' %>
+              <% else %>
+                <%= image_tag('no-image.png', size: '60') %>
+              <% end %>
+            </div>
+            <div class="col-6">
+              <div><%= l.title %></div>
+              <small id="number" class="text-secondary">登録数:<%= l.restaurants.size %></small>
+            </div>
+            <div class="col-2 pt-2 ml-3" style="color: #c9c9c9;" >
+              <%= fa_icon "chevron-right", class: "fa-2x" %>
+            </div>
           </div>
         <% end %>
       </div>
