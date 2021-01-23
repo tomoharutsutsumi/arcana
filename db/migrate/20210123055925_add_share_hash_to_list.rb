@@ -4,7 +4,7 @@ class AddShareHashToList < ActiveRecord::Migration[5.2]
     add_column :lists, :share_hash, :string, null: false, default: ''
 
     List.all.find_each do |l|
-      l.update(share_hash: Digest::SHA1.hexdigest(l.created_at.to_s))
+      l.update(share_hash: Digest::SHA1.hexdigest(l.id.to_s))
     end
 
     add_index :lists, :share_hash, unique: true
