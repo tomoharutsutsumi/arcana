@@ -3,9 +3,10 @@ class List < ApplicationRecord
   has_many :permission_lists, dependent: :destroy
   has_many :permission_requests, through: :permission_lists
   has_many :restaurants, dependent: :destroy
-  has_one :share_hash
 
   validates :title, presence: true
+
+  before_save :attach_share_hash
 
   def archive_and_destroy
     transaction do
@@ -16,5 +17,9 @@ class List < ApplicationRecord
 
   def archive
     ArchivedList.archive(self) 
+  end
+
+  def attach_share_hash
+    self.assign_attributes(share_hash: Digest::SHA1.hexdigest(Time.now.to_s))
   end
 end

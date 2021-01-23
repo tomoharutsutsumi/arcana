@@ -1,6 +1,6 @@
 class SharedListsController < ApplicationController
   def show
-    @list = ShareHash.find_by(hash_string: params[:hash_string]).list
+    @list = List.find_by(share_hash: params[:share_hash])
   end
 
   private

@@ -1,26 +1,20 @@
-<div class="text-right mt-3">
+<div class="d-flex my-4 justify-content-between">
   <div>
+    <% if @list.user.id == current_user.id && @list.share_hash.present? %>
+      <div>
+        <textarea style="font-size: 10px; opacity: .01; height: 0; position: absolute; z-index: -1;" id="copy-text" class="border"><%= @list.share_hash.present? ? "#{Rails.env.production? ? 'https://web-arcana.herokuapp.com' : 'http://localhost:3000'}/shared_lists/#{@list.id}?share_hash=#{@list.share_hash}" : '未発行' %></textarea>
+      </div>
+      <button id="copy-button" class="mt-2 btn btn-secondary" style="background: #EE9900; border: #EE9900;">リストを共有</button>
+    <% end %>
+  </div>
+  <div style="margin-top: 15px;">
     <%= 
       link_to_if(@list.user.id == current_user.id, '+お店を登録する', new_list_restaurant_path(@list)) do 
         ''
       end
     %>
   </div>
-  <div class="mt-2">
-    <%= 
-      link_to_if(@list.user.id == current_user.id && @list.share_hash.nil?, '共有リンクを発行する', list_share_hashes_path(@list), method: :post) do 
-        ''
-      end
-    %>
-  </div>
 </div>
-<% if @list.user.id == current_user.id && @list.share_hash.present? %>
-  <div>このリストの共有リンク</div>
-  <div>
-    <textarea style="font-size: 10px" id="copy-text" class="border"><%= @list.share_hash.present? ? "#{Rails.env.production? ? 'https://web-arcana.herokuapp.com' : 'http://localhost:3000'}/shared_lists/#{@list.id}?hash_string=#{@list.share_hash.hash_string}" : '未発行' %></textarea>
-  </div>
-  <button id="copy-button" class="mt-2 btn btn-secondary btn-sm">リンクのコピー</button>
-<% end %>
 <% if @restaurants.present? %>
   <% @restaurants.each do |r| %>
     <div class="card my-3" style="text-decoration: none;">

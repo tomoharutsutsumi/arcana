@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    session[:hash_string] = params[:hash_string] if params.has_key?(:hash_string)
+    session[:share_hash] = params[:share_hash] if params.has_key?(:share_hash)
     super
   end
 

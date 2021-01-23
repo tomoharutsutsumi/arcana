@@ -1,7 +1,7 @@
 <% if @list.restaurants.present? %>
   <% @list.restaurants.each do |r| %>
     <div class="card my-3">
-      <%= link_to(shared_list_shared_restaurant_path(@list, r, hash_string: @list.share_hash.hash_string), class: "text-dark") do %>
+      <%= link_to(shared_list_shared_restaurant_path(@list, r, share_hash: @list.share_hash), class: "text-dark") do %>
         <div class="card-body">
           <div class="text-left ml-3 mt-2 font-weight-bold"><%= r.name.present? ? r.name.truncate(20) : '未登録' %></div>
           <div class="ml-3 text-secondary" style="font-size: 0.7rem"><%= r.category.present? ? r.category.truncate(15) : '未登録' %></div>
@@ -28,7 +28,7 @@
 <% end %>
 <% if current_user.nil? %>
   <div class="text-center mt-3">
-    <%= link_to '自分のリストとして登録', new_user_registration_path(hash_string: @list.share_hash.hash_string) %>
+    <%= link_to '自分のリストとして登録', new_user_registration_path(share_hash: @list.share_hash) %>
   </div>
 <%# <% else %>
   <%#= link_to '自分のリストとして登録', new_user_registration_path(hash_string: @list.share_hash.hash_string) %>

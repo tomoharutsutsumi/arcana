@@ -13,7 +13,7 @@
   <body>
     <%= render 'layouts/header' %>
     <% flash.each do |key, value| %>
-      <div class="alert alert-success" role="alert"><%= value %></div>
+      <div class="alert" role="alert" style="background: #FEE785; color: #FF3601;"><%= value %></div>
     <% end %>
     <main class="mx-auto min-vh-100 bottom-height" style="width: 90%;">
       <%= yield %>

@@ -59,15 +59,15 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('リストを登録する')
       fill_in 'list_title', with: 'list1'
       click_on 'commit'
-      expect(user.lists.last.title).to eq 'list1'
       expect(page).to have_content('リストを登録しました')
+      expect(user.lists.last.title).to eq 'list1'
       expect(page).to have_content('list1')
       click_on '+リスト追加'
       expect(page).to have_content('リストを登録する')
       fill_in 'list_title', with: 'list2'
       click_on 'commit'
-      expect(user.lists.last.title).to eq 'list2'
       expect(page).to have_content('リストを登録しました')
+      expect(user.lists.last.title).to eq 'list2'
       expect(page).to have_content('list2')
       click_on 'list1'
       expect(page).to have_content('まだお店が登録されていません')
@@ -158,14 +158,14 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('リストを登録しました')
       expect(page).to have_content('list11')
       click_on 'list11'
-      expect(page).to have_content('共有リンクを発行する')
-      click_on '共有リンクを発行する'
-      expect(page).to have_content('共有リンクが発行されました')
+      # expect(page).to have_content('共有リンクを発行する')
+      # click_on '共有リンクを発行する'
+      # expect(page).to have_content('共有リンクが発行されました')
       find('.fa-users').click
       click_on 'ログアウト'
       OmniAuth.config.mock_auth[:facebook] = nil
       Rails.application.env_config['omniauth.auth'] = facebook_mock
-      visit shared_list_path(user.lists.last.id, hash_string: user.lists.last.share_hash.hash_string)
+      visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
       expect(page).to have_content('まだお店が登録されていません')
       expect(page).to have_content('自分のリストとして登録')
       click_on '自分のリストとして登録'
@@ -187,12 +187,12 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('リストを登録しました')
       expect(page).to have_content('list11')
       click_on 'list11'
-      expect(page).to have_content('共有リンクを発行する')
-      click_on '共有リンクを発行する'
-      expect(page).to have_content('共有リンクが発行されました')
+      # expect(page).to have_content('共有リンクを発行する')
+      # click_on '共有リンクを発行する'
+      # expect(page).to have_content('共有リンクが発行されました')
       find('.fa-users').click
       click_on 'ログアウト'
-      visit shared_list_path(user.lists.last.id, hash_string: user.lists.last.share_hash.hash_string)
+      visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
       expect(page).to have_content('まだお店が登録されていません')
       expect(page).to have_content('自分のリストとして登録')
       click_on '自分のリストとして登録'
