@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'manage requests', type: :system do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user, name: 'Other Person', email: 'test1@gmail.com') }
-  let!(:list1) { create(:list, user: other_user, title: 'list1', share_hash: Digest::SHA1.hexdigest(10.to_s)) }
-  let!(:list2) { create(:list, user: other_user, title: 'list2', share_hash: Digest::SHA1.hexdigest(20.to_s)) }
-  let!(:list3) { create(:list, user: other_user, title: 'list3', share_hash: Digest::SHA1.hexdigest(30.to_s)) }
+  let!(:list1) { create(:list, user: other_user, title: 'list1') }
+  let!(:list2) { create(:list, user: other_user, title: 'list2') }
+  let!(:list3) { create(:list, user: other_user, title: 'list3') }
 
   describe 'normal' do
     before do

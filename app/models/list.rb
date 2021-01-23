@@ -6,7 +6,7 @@ class List < ApplicationRecord
 
   validates :title, presence: true
 
-  before_save :attach_share_hash
+  before_create :attach_share_hash
 
   def archive_and_destroy
     transaction do
@@ -20,6 +20,6 @@ class List < ApplicationRecord
   end
 
   def attach_share_hash
-    self.assign_attributes(share_hash: Digest::SHA1.hexdigest(Time.now.to_s))
+    self.assign_attributes(share_hash: Digest::SHA1.hexdigest(Time.now.to_s + Random.rand(100).to_s))
   end
 end
