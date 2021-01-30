@@ -28,7 +28,7 @@
 <% end %>
 <% if current_user.nil? %>
   <div class="text-center mt-3">
-    <%= link_to '自分のリストとして登録', new_user_registration_path(share_hash: @list.share_hash) %>
+    <%= link_to 'ログインしてリストを保存する', new_user_registration_path(share_hash: @list.share_hash) %>
   </div>
 <%# <% else %>
   <%#= link_to '自分のリストとして登録', new_user_registration_path(hash_string: @list.share_hash.hash_string) %>
