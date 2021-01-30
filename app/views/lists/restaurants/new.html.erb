@@ -44,18 +44,65 @@
 
 <% if @searched %>
   <div class="mt-5"><hr></div>
-  <div>お店が見つかりませんでしたか？カタカナ検索もお試しください。</div>
-  <div>それでも無い場合、下のフォームから登録することができます。</div>
+  <div></div>
+  <h4 class="text-center">自分で登録</h4>
   <%= form_with model: @restaurant, url: list_restaurants_path, local: true, class: "text-center mt-3" do |f| %>
-    <p><%= f.text_field :name, placeholder: '店名', class: "w-75 p-2" %></p>
-    <p><%= f.text_field :address, placeholder: '住所', class: "w-75 p-2" %></p>
-    <p><%= f.text_field :category, placeholder: 'カテゴリ', class: "w-75 p-2" %></p>
-    <p><%= f.number_field :budget, placeholder: '予算', class: "w-75 p-2" %></p>
-    <p><%= f.text_field :tel, placeholder: '電話番号', class: "w-75 p-2" %></p>
-    <p><%= f.text_field :combined_access, placeholder: 'アクセス', class: "w-75 p-2" %>
-    <p><%= f.text_field :opentime, placeholder: '営業時間', class: "w-75 p-2" %>
-    <p><%= f.text_field :holiday, placeholder: '定休日', class: "w-75 p-2" %></p>
-    <p><%= f.text_field :url, placeholder: 'URL', class: "w-75 p-2" %></p>
+    <div class="container"> 
+      <div class="row mb-3">
+        <div class="col-4 mt-2 text-left">店名</div>
+        <div class="col-8" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+          <%= f.text_field :name, class: "h-100", style: 'border: none; width: 100%; outline: none;' %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4 mt-2 text-left">住所</div>
+        <div class="col-8" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+          <%= f.text_field :address, style: 'border: none; width: 100%; outline: none;' %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4 mt-2 text-left">カテゴリ</div>
+        <div class="col-8" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+          <%= f.text_field :category, style: 'border: none; width: 100%; outline: none;' %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4 mt-2 text-left">予算</div>
+        <div class="col-8" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+          <%= f.text_field :budget, style: 'border: none; width: 100%; outline: none;' %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4 mt-2 text-left">電話番号</div>
+        <div class="col-8" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+          <%= f.text_field :tel, style: 'border: none; width: 100%; outline: none;' %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4 mt-2 text-left">アクセス</div>
+        <div class="col-8" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+          <%= f.text_field :combined_access, style: 'border: none; width: 100%; outline: none;' %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4 mt-2 text-left">営業時間</div>
+        <div class="col-8" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+          <%= f.text_field :opentime, style: 'border: none; width: 100%; outline: none;' %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4 mt-2 text-left">定休日</div>
+        <div class="col-8" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+          <%= f.text_field :holiday, style: 'border: none; width: 100%; outline: none;' %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4 mt-2 text-left">URL</div>
+        <div class="col-8" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+          <%= f.text_field :url, style: 'border: none; width: 100%; outline: none;' %>
+        </div>
+      </div>
+    </div>
     <p id="submit"><%= f.submit '登録する' %></p>
   <% end %>
 <% end %>
