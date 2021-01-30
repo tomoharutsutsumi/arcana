@@ -11,6 +11,7 @@ class Lists::RestaurantsController < ApplicationController
       @results = Restaurant.get_info_from_api(params[:name], params[:katakana])
       @restaurant = @list.restaurants.build
     end
+    @link = list_restaurants_path(@list)
   end
 
   def create

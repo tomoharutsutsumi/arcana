@@ -13,7 +13,12 @@
   <body>
     <%= render 'layouts/header' %>
     <% flash.each do |key, value| %>
-      <div class="alert" role="alert" style="background: #FEE785; color: #FF3601;"><%= value %></div>
+      <div class="alert" role="alert" style="background: #FEE785; color: #FF3601;">
+        <%= value %>
+        <% if @link %>
+          <%= link_to '登録リストに戻る', @link, class: "ml-5" %>
+        <% end %>
+      </div>
     <% end %>
     <main class="mx-auto min-vh-100 bottom-height" style="width: 90%;">
       <%= yield %>
