@@ -23,6 +23,18 @@ RSpec.describe 'manage restaurants', type: :system do
       expect(find('#number')).to have_content 1
     end
 
+    it 'can go back to list the restaurant belongs to' do
+      click_on "#{list.title}"
+      expect(page).to have_content('まだお店が登録されていません')
+      click_on '+お店を登録する'
+      fill_in 'freeword', with: 'もぅあしびー'
+      page.all(:css, '.fa-search')[0].click
+      click_on '登録する', match: :first 
+      expect(page).to have_content('登録リストに戻る')
+      click_on '登録リストに戻る'
+      expect(page).to have_content('もぅあしびー')
+    end
+
     it 'can be added when no restanrants are found' do
       click_on "#{list.title}"
       expect(page).to have_content('まだお店が登録されていません')
