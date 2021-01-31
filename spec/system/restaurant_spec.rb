@@ -13,8 +13,8 @@ RSpec.describe 'manage restaurants', type: :system do
       click_on "#{list.title}"
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'もぅあしびー'
-      click_on 'commit'
+      fill_in 'freeword', with: 'もぅあしびー'
+      page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
       expect(list.restaurants.count).to eq 1
@@ -23,31 +23,13 @@ RSpec.describe 'manage restaurants', type: :system do
       expect(find('#number')).to have_content 1
     end
 
-    it 'can be added as a restaurant with katakana' do
-      click_on "#{list.title}"
-      expect(page).to have_content('まだお店が登録されていません')
-      click_on '+お店を登録する'
-      fill_in 'name', with: 'イルブリオ'
-      click_on 'commit'
-      expect(page).to have_content('該当するお店が見つかりませんでした')
-      check 'katakana'
-      fill_in 'name', with: 'イルブリオ'
-      click_on 'commit', match: :first
-      click_on '登録する', match: :first
-      expect(page).to have_content('お店を登録しました')
-      expect(list.restaurants.count).to eq 1
-      expect(list.restaurants.last.name).to eq 'IL Brio'
-      click_on 'Myリスト'
-      expect(find('#number')).to have_content 1
-    end
-
     it 'can be added when no restanrants are found' do
       click_on "#{list.title}"
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'test1'
-      click_on 'commit'
-      expect(page).to have_content('お店が見つかりませんでしたか？')
+      fill_in 'freeword', with: 'test1'
+      page.all(:css, '.fa-search')[0].click
+      expect(page).to have_content('該当するお店が見つかりませんでした。')
       fill_in 'restaurant_name', with: 'test_name'
       fill_in 'restaurant_address', with: 'test_address'
       fill_in 'restaurant_category', with: 'test_category'
@@ -69,8 +51,8 @@ RSpec.describe 'manage restaurants', type: :system do
       click_on "#{list.title}"
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'もぅあしびー'
-      click_on 'commit'
+      fill_in 'freeword', with: 'もぅあしびー'
+      page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
       click_on 'Myリスト'
@@ -91,8 +73,8 @@ RSpec.describe 'manage restaurants', type: :system do
       click_on "#{list.title}"
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'マクドナルド'
-      click_on 'commit'
+      fill_in 'freeword', with: 'マクドナルド'
+      page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
       click_on 'Myリスト'
@@ -109,8 +91,8 @@ RSpec.describe 'manage restaurants', type: :system do
       click_on "#{list.title}"
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'マクドナルド'
-      click_on 'commit'
+      fill_in 'freeword', with: 'マクドナルド'
+      page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
       click_on 'Myリスト'

@@ -6,11 +6,12 @@ class Lists::RestaurantsController < ApplicationController
   end
 
   def new
-    @searched = params.has_key?(:name)
+    @searched = params.has_key?(:freeword)
     if @searched
-      @results = Restaurant.get_info_from_api(params[:name], params[:katakana])
+      @results = Restaurant.get_info_from_api(params[:freeword])
       @restaurant = @list.restaurants.build
     end
+    @link = list_restaurants_path(@list)
   end
 
   def create
