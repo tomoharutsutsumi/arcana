@@ -72,29 +72,29 @@ RSpec.describe 'manage lists', type: :system do
       click_on 'list1'
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'もぅあしびー'
-      click_on 'commit'
+      fill_in 'freeword', with: 'もぅあしびー'
+      page.all(:css, '.fa-search')[0].click
       sleep 5
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
-      check 'katakana'
-      fill_in 'name', with: 'イルブリオ'
-      click_on 'commit', match: :first
+      # check 'katakana'
+      fill_in 'freeword', with: 'イルブリオ'
+      page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first
       expect(page).to have_content('お店を登録しました')
       click_on 'Myリスト'
       click_on 'list2'
       expect(page).to have_content('まだお店が登録されていません')
       click_on '+お店を登録する'
-      fill_in 'name', with: 'ケンタッキー'
-      click_on 'commit'
+      fill_in 'freeword', with: 'ケンタッキー'
+      page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
-      fill_in 'name', with: '喜鈴'
-      click_on 'commit'
+      fill_in 'freeword', with: '喜鈴'
+      page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
-      find('.fa-users').click
+      page.all(:css, '.fa-search')[1].click
       click_on 'ログアウト'
 
       # send a request to this user
@@ -137,7 +137,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(Archiving.last.user_id).to eq other_user.id
 
       # list and restaurants can be archived and other user can see check them out
-      find('.fa-users').click
+      find('.fa-search').click
       click_on 'ログアウト'
       sign_in_as(other_user)
       click_on('リスト一覧')
@@ -161,14 +161,14 @@ RSpec.describe 'manage lists', type: :system do
       # expect(page).to have_content('共有リンクを発行する')
       # click_on '共有リンクを発行する'
       # expect(page).to have_content('共有リンクが発行されました')
-      find('.fa-users').click
+      find('.fa-search').click
       click_on 'ログアウト'
       OmniAuth.config.mock_auth[:facebook] = nil
       Rails.application.env_config['omniauth.auth'] = facebook_mock
       visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
       expect(page).to have_content('まだお店が登録されていません')
-      expect(page).to have_content('自分のリストとして登録')
-      click_on '自分のリストとして登録'
+      expect(page).to have_content('ログインしてリストを保存する')
+      click_on 'ログインしてリストを保存する'
       expect(page).to have_content('新規登録')
       click_link "Facebookでログイン"
       expect(page).to have_content('Myリスト')
@@ -190,12 +190,12 @@ RSpec.describe 'manage lists', type: :system do
       # expect(page).to have_content('共有リンクを発行する')
       # click_on '共有リンクを発行する'
       # expect(page).to have_content('共有リンクが発行されました')
-      find('.fa-users').click
+      find('.fa-search').click
       click_on 'ログアウト'
       visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
       expect(page).to have_content('まだお店が登録されていません')
-      expect(page).to have_content('自分のリストとして登録')
-      click_on '自分のリストとして登録'
+      expect(page).to have_content('ログインしてリストを保存する')
+      click_on 'ログインしてリストを保存する'
       expect(page).to have_content('新規登録')
       fill_in 'user_email', with: 'test@gmail.com'
       fill_in 'user_name', with: 'test user'

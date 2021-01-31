@@ -25,10 +25,10 @@
             <% if @list.user.id == current_user.id %>
               <div class="d-flex align-items-center ">
                 <%= link_to(edit_restaurant_path(r), class: "mr-1 mt-1") do %>
-                  <div class="ml-1 text-dark px-1" style="font-size: 1.4rem; background: #EE9900; border-radius: 5px;"><%= fa_icon "edit", class: "text-white" %></div>
+                  <div class="ml-1 text-dark px-1" style="font-size: 1.4rem;"><%= fa_icon "edit" %></div>
                 <% end %>
                 <%= link_to(restaurant_path(r), data: { confirm: "本当によろしいですか?" }, method: :delete, class: "mr-2") do %>
-                  <div class="ml-1 text-dark px-2" style="font-size: 1.4rem; background: #EE9900; border-radius: 5px; margin-top: 3px;"><%= fa_icon "trash", class: "text-white" %></div>
+                  <div class="text-dark" style="font-size: 1.4rem; "><%= fa_icon "trash" %></div>
                 <% end %>
               </div>
             <% end %>
@@ -80,7 +80,7 @@
       const copy_text = document.querySelector("#copy-text");
       copy_text.select();
       document.execCommand("copy");
-      alert("コピーしました。");
+      window.alert("コピーしました");
     };
   </script>
 <% end %>

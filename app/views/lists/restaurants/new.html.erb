@@ -1,7 +1,7 @@
 <h4 class="mt-4 text-center">お店を探す</h4>
 <%= form_with url: new_list_restaurant_path, method: :get, local: true, class: "mt-2" do |f| %>
   <div class="text-center" style="border: 1px solid gray; border-radius: 9px; height: 37px;">
-    <%= f.text_field :name, class: "h-100", style: 'border: none; width: 80%; outline: none;' %>
+    <%= f.text_field :freeword, class: "h-100", style: 'border: none; width: 80%; outline: none;' %>
     <%= button_tag(type: 'submit', class: "bg-white float-right mr-3", style: "border: none; outline: none;") do %>
       <%= fa_icon "search", class: "fa-1x mt-2" %>
     <% end %>

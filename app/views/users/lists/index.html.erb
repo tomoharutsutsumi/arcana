@@ -5,8 +5,8 @@
   </div>
   <% if @lists.present? %>
     <% @lists.each do |l| %>
-      <div class="my-2 border-bottom">
-        <div class="d-flex justify-content-end align-items-center" style="height: 30px; margin-bottom: 5px;">
+      <div class="card my-2 border-bottom">
+        <div class="d-flex justify-content-end align-items-center mr-2" style="height: 30px; margin-bottom: 5px;">
           <%= link_to(edit_user_list_path(current_user, l), class: "mr-2") do %>
             <div class="ml-1 text-dark" style="font-size: 1.5rem"><%= fa_icon "edit" %></div>
           <% end %>
@@ -14,7 +14,7 @@
             <div class="ml-2 text-dark" style="font-size: 1.3rem; padding-bottom: 4px;"><%= fa_icon "trash" %></div>
           <% end %>
         </div>
-        <%= link_to(list_restaurants_path(l), class: "text-dark") do %>
+        <%= link_to(list_restaurants_path(l), class: "text-dark pl-3") do %>
           <div class="row" style="height: 70px;">
             <div class="col-3">
               <% if l.restaurants.present? %>
@@ -26,9 +26,6 @@
             <div class="col-6">
               <div><%= l.title %></div>
               <small id="number" class="text-secondary">登録数:<%= l.restaurants.size %></small>
-            </div>
-            <div class="col-2 pt-2 ml-3" style="color: #c9c9c9;" >
-              <%= fa_icon "chevron-right", class: "fa-2x" %>
             </div>
           </div>
         <% end %>
