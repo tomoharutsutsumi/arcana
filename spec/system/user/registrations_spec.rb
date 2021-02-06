@@ -28,7 +28,7 @@ RSpec.describe 'user registrations', type: :system do
         Rails.application.env_config['omniauth.auth'] = facebook_mock
         visit root_path
         click_link "Facebookでログイン"
-        find('.fa-search').click
+        find('.fa-user').click
         click_link "ログアウト"
         expect{ click_link "Facebookでログイン" }.not_to change(User, :count)
       end

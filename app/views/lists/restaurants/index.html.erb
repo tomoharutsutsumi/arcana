@@ -40,22 +40,22 @@
             <% end %>
           </div>
           <div class="row mb-3">
-            <div class="col-4 font-weight-bold">住所</div>
+            <div class="col-4 font-weight-bold" style="padding-left: 35px;">住所</div>
             <div class="col-8" style="font-size: 0.8rem"><%= r.place.present? ? r.place : '未登録' %></div>
           </div>
           <div class="row mb-3">
-            <div class="col-4 font-weight-bold">アクセス</div>
+            <div class="col-4 font-weight-bold" style="padding-left: 35px;">アクセス</div>
             <div class="col-8" style="font-size: 0.8rem"><%= restaurant_access(r).present? ? restaurant_access(r).truncate(20) : '未登録' %></div>
           </div>
           <div class="row mb-3">
-            <div class="col-4 font-weight-bold">営業時間</div>
+            <div class="col-4 font-weight-bold" style="padding-left: 35px;">営業時間</div>
             <div class="col-8" style="font-size: 0.8rem"><%= r.opentime.present? ? r.opentime : '未登録' %></div>
           </div>
           <div class="row mb-3">
-            <div class="col-4 font-weight-bold">定休日</div>
+            <div class="col-4 font-weight-bold" style="padding-left: 35px;">定休日</div>
             <div class="col-8" style="font-size: 0.8rem"><%= r.holiday.present? ? r.holiday : '未登録' %></div>
           </div>
-          <div class="border my-2 pb-5" style="font-size: 0.8rem; padding-left: 0.5rem;"><%= r.comment.present? ? r.comment : 'コメント未記入' %></div>
+          <div class="border my-2 mx-3 pb-5" style="font-size: 0.8rem; padding-left: 3px;"><%= r.comment.present? ? r.comment : 'コメント未記入' %></div>
         </div>
       <% end %>
     </div>

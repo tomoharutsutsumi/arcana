@@ -94,58 +94,62 @@ RSpec.describe 'manage lists', type: :system do
       page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
-      page.all(:css, '.fa-search')[1].click
+      find('.fa-user').click
       click_on 'ログアウト'
 
       # send a request to this user
-      sign_in_as(other_user)
-      click_on '検索'
-      expect(page).to have_content '共有履歴'
-      fill_in 'name', with: 'John Doe'
-      click_on '検索', match: :first
-      expect(page).to have_content('John Doe')
-      expect(page).to have_content('リクエスト')
-      click_on 'リクエスト'
-      expect(page).to have_content('John Doe')
-      click_on '+リクエスト'
-      expect(page).to have_content('リクエストを送信しました')
-      click_on 'ログアウト'
+
+      # this is a deleted function
+      # sign_in_as(other_user)
+      # click_on '検索'
+      # expect(page).to have_content '共有履歴'
+      # fill_in 'name', with: 'John Doe'
+      # click_on '検索', match: :first
+      # expect(page).to have_content('John Doe')
+      # expect(page).to have_content('リクエスト')
+      # click_on 'リクエスト'
+      # expect(page).to have_content('John Doe')
+      # click_on '+リクエスト'
+      # expect(page).to have_content('リクエストを送信しました')
+      # click_on 'ログアウト'
 
       # permit the request 
-      sign_in_as(user)
-      expect(page).to have_content 'ログインしました'
-      click_on '検索'
-      expect(page).to have_content('Other Person')
-      click_on '承認'
-      expect(page).to have_content('リクエストを承認しました')
-      check 'list1'
-      check 'list2'
-      click_on '共有する'
-      expect(page).to have_content('Other Person')
-      expect(page).to have_content('承認済み')
-      expect(page).to have_content('list1')
-      expect(page).to have_content('list2')
-      click_on 'Myリスト'
-      page.all(:css, '.fa-trash')[0].click
-      alert = page.driver.browser.switch_to.alert
-      alert.accept
-      expect(page).to have_content('削除しました')
-      expect(user.lists.count).to eq 1
-      expect(ArchivedList.last.title).to eq 'list1'
-      expect(ArchivedList.last.archived_restaurants.first.name).to eq 'もぅあしびー'
-      expect(ArchivedList.last.archived_restaurants.last.name).to eq 'IL Brio'
-      expect(Archiving.last.user_id).to eq other_user.id
+      # this is a deleted function
+      # sign_in_as(user)
+      # expect(page).to have_content 'ログインしました'
+      # click_on '検索'
+      # expect(page).to have_content('Other Person')
+      # click_on '承認'
+      # expect(page).to have_content('リクエストを承認しました')
+      # check 'list1'
+      # check 'list2'
+      # click_on '共有する'
+      # expect(page).to have_content('Other Person')
+      # expect(page).to have_content('承認済み')
+      # expect(page).to have_content('list1')
+      # expect(page).to have_content('list2')
+      # click_on 'Myリスト'
+      # page.all(:css, '.fa-trash')[0].click
+      # alert = page.driver.browser.switch_to.alert
+      # alert.accept
+      # expect(page).to have_content('削除しました')
+      # expect(user.lists.count).to eq 1
+      # expect(ArchivedList.last.title).to eq 'list1'
+      # expect(ArchivedList.last.archived_restaurants.first.name).to eq 'もぅあしびー'
+      # expect(ArchivedList.last.archived_restaurants.last.name).to eq 'IL Brio'
+      # expect(Archiving.last.user_id).to eq other_user.id
 
       # list and restaurants can be archived and other user can see check them out
-      find('.fa-search').click
-      click_on 'ログアウト'
-      sign_in_as(other_user)
-      click_on('リスト一覧')
-      expect(page).to have_content('list1')
-      expect(page).to have_content('list2')
-      click_on 'list1'
-      expect(page).to have_content('もぅあしびー')
-      expect(page).to have_content('IL Brio')
+      # this is a deleted function
+      # find('.fa-search').click
+      # click_on 'ログアウト'
+      # sign_in_as(other_user)
+      # click_on('リスト一覧')
+      # expect(page).to have_content('list1')
+      # expect(page).to have_content('list2')
+      # click_on 'list1'
+      # expect(page).to have_content('もぅあしびー')
+      # expect(page).to have_content('IL Brio')
     end
 
     it 'can be shared with URL and user can register through the list with facebook' do
@@ -161,7 +165,7 @@ RSpec.describe 'manage lists', type: :system do
       # expect(page).to have_content('共有リンクを発行する')
       # click_on '共有リンクを発行する'
       # expect(page).to have_content('共有リンクが発行されました')
-      find('.fa-search').click
+      find('.fa-user').click
       click_on 'ログアウト'
       OmniAuth.config.mock_auth[:facebook] = nil
       Rails.application.env_config['omniauth.auth'] = facebook_mock
@@ -190,7 +194,7 @@ RSpec.describe 'manage lists', type: :system do
       # expect(page).to have_content('共有リンクを発行する')
       # click_on '共有リンクを発行する'
       # expect(page).to have_content('共有リンクが発行されました')
-      find('.fa-search').click
+      find('.fa-user').click
       click_on 'ログアウト'
       visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
       expect(page).to have_content('まだお店が登録されていません')
