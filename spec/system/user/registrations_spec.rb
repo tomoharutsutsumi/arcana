@@ -30,7 +30,8 @@ RSpec.describe 'user registrations', type: :system do
         visit root_path
         click_link "Facebookでログイン"
         expect(page).to have_content('Myリスト')
-        logout
+        click_on 'ログアウト'
+        expect(page).to have_content('ログアウトしました')
         visit new_user_session_path
         expect{ click_link "Facebookでログイン" }.not_to change(User, :count)
       end

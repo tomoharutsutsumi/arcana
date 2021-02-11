@@ -27,7 +27,7 @@
   <div class="text-center mt-3">まだお店が登録されていません</div>
 <% end %>
 <% if user_signed_in? %>
-  <%= link_to 'このリストをMyリストに保存する', requests_shared_lists_path(share_hash: @list.share_hash) %>
+  <%= link_to 'このリストをMyリストに保存する', requests_shared_lists_path(share_hash: @list.share_hash), method: :post %>
 <% else %>
   <div class="text-center mt-3">
     <div><%= link_to '新規登録してリストを保存する', new_user_registration_path(share_hash: @list.share_hash) %></div>

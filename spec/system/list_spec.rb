@@ -4,6 +4,7 @@ include Warden::Test::Helpers
 RSpec.describe 'manage lists', type: :system do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user, name: 'Other Person', email: 'test1@gmail.com') }
+  let(:list) { create(:list, user: user)}
 
   describe 'normal' do
     before do
@@ -53,7 +54,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(user.lists.count).to eq 0
     end
 
-    it 'can be deleted although it is allowed to be seen from someone',type: :doing do
+    it 'can be deleted although it is allowed to be seen from someone' do
       # lists and restaurants are added
       expect(page).to have_content('Myリストがまだ追加されていません')
       click_on '+リスト追加'
@@ -165,7 +166,8 @@ RSpec.describe 'manage lists', type: :system do
       # expect(page).to have_content('共有リンクを発行する')
       # click_on '共有リンクを発行する'
       # expect(page).to have_content('共有リンクが発行されました')
-      logout
+      click_on 'ログアウト'
+      expect(page).to have_content('ログアウトしました')
       OmniAuth.config.mock_auth[:facebook] = nil
       Rails.application.env_config['omniauth.auth'] = facebook_mock
       visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
@@ -180,7 +182,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('list11')
     end
 
-    it 'can be shared with URL and user can register through the list with normal form' do
+    it 'can be shared with URL and user can sign up through the list with normal form' do
       expect(page).to have_content('Myリストがまだ追加されていません')
       click_on '+リスト追加'
       expect(page).to have_content('リストを登録する')
@@ -190,10 +192,8 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('リストを登録しました')
       expect(page).to have_content('list11')
       click_on 'list11'
-      # expect(page).to have_content('共有リンクを発行する')
-      # click_on '共有リンクを発行する'
-      # expect(page).to have_content('共有リンクが発行されました')
-      logout
+      click_on 'ログアウト'
+      expect(page).to have_content('ログアウトしました')
       visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
       expect(page).to have_content('まだお店が登録されていません')
       expect(page).to have_content('新規登録してリストを保存する')
@@ -205,6 +205,58 @@ RSpec.describe 'manage lists', type: :system do
       fill_in 'user_password_confirmation', with: 'password'
       click_on 'commit'
       expect(page).to have_content('アカウント登録が完了しました')
+      click_on 'リスト一覧'
+      expect(page).to have_content('list11')
+    end
+
+    it 'can be shared with URL and user can sign in through the list with normal form' do
+      expect(page).to have_content('Myリストがまだ追加されていません')
+      click_on '+リスト追加'
+      expect(page).to have_content('リストを登録する')
+      fill_in 'list_title', with: 'list11'
+      expect{ click_on 'commit' }.to change{ user.lists.count }.by(1)
+      expect(user.lists.last.title).to eq 'list11'
+      expect(page).to have_content('リストを登録しました')
+      expect(page).to have_content('list11')
+      click_on 'list11'
+      click_on 'ログアウト'
+      expect(page).to have_content('ログアウトしました')
+      visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
+      expect(page).to have_content('まだお店が登録されていません')
+      expect(page).to have_content('ログインしてリストを保存する')
+      click_on 'ログインしてリストを保存する'
+      expect(page).to have_content('ログイン')
+      fill_in 'user_email', with: other_user.email
+      fill_in 'user_password', with: other_user.password
+      click_on 'commit'
+      expect(page).to have_content('ログインしました')
+      click_on 'リスト一覧'
+      expect(page).to have_content('list11')
+    end
+
+    it 'can be shared with URL and logined user can check the list' do
+      expect(page).to have_content('Myリストがまだ追加されていません')
+      click_on '+リスト追加'
+      expect(page).to have_content('リストを登録する')
+      fill_in 'list_title', with: 'list11'
+      expect{ click_on 'commit' }.to change{ user.lists.count }.by(1)
+      expect(user.lists.last.title).to eq 'list11'
+      expect(page).to have_content('リストを登録しました')
+      expect(page).to have_content('list11')
+      click_on 'ログアウト'
+      expect(page).to have_content('ログアウトしました')
+      # list
+      # logout
+      visit new_user_session_path
+      expect(page).to have_content('ログイン')
+      fill_in 'user_email', with: other_user.email
+      fill_in 'user_password', with: other_user.password
+      click_on 'commit'
+      expect(page).to have_content('ログインしました')
+      visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
+      expect(page).to have_content('このリストをMyリストに保存する')
+      click_on 'このリストをMyリストに保存する'
+      expect(page).to have_content 'リストに登録しました'
       click_on 'リスト一覧'
       expect(page).to have_content('list11')
     end
