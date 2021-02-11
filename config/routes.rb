@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :shared_lists do
     resources :shared_restaurants, module: :shared_lists
   end
-  # resources :requests do
-  #   resources :shared_lists, module: :requests
-  # end
+  namespace :requests do
+    resources :shared_lists
+  end
 end

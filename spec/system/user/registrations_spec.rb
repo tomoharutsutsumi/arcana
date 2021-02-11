@@ -1,4 +1,5 @@
 require 'rails_helper'
+include Warden::Test::Helpers
 
 RSpec.describe 'user registrations', type: :system do
   describe 'user registrations' do
@@ -28,8 +29,9 @@ RSpec.describe 'user registrations', type: :system do
         Rails.application.env_config['omniauth.auth'] = facebook_mock
         visit root_path
         click_link "Facebookでログイン"
-        find('.fa-user').click
-        click_link "ログアウト"
+        expect(page).to have_content('Myリスト')
+        logout
+        visit new_user_session_path
         expect{ click_link "Facebookでログイン" }.not_to change(User, :count)
       end
     end

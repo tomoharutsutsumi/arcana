@@ -1,4 +1,5 @@
 require 'rails_helper'
+include Warden::Test::Helpers
 
 RSpec.describe 'manage lists', type: :system do
   let!(:user) { create(:user) }
@@ -52,7 +53,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(user.lists.count).to eq 0
     end
 
-    it 'can be deleted although it is allowed to be seen from someone' do
+    it 'can be deleted although it is allowed to be seen from someone',type: :doing do
       # lists and restaurants are added
       expect(page).to have_content('Myリストがまだ追加されていません')
       click_on '+リスト追加'
@@ -94,8 +95,7 @@ RSpec.describe 'manage lists', type: :system do
       page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
-      find('.fa-user').click
-      click_on 'ログアウト'
+      logout
 
       # send a request to this user
 
@@ -165,8 +165,7 @@ RSpec.describe 'manage lists', type: :system do
       # expect(page).to have_content('共有リンクを発行する')
       # click_on '共有リンクを発行する'
       # expect(page).to have_content('共有リンクが発行されました')
-      find('.fa-user').click
-      click_on 'ログアウト'
+      logout
       OmniAuth.config.mock_auth[:facebook] = nil
       Rails.application.env_config['omniauth.auth'] = facebook_mock
       visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
@@ -194,12 +193,11 @@ RSpec.describe 'manage lists', type: :system do
       # expect(page).to have_content('共有リンクを発行する')
       # click_on '共有リンクを発行する'
       # expect(page).to have_content('共有リンクが発行されました')
-      find('.fa-user').click
-      click_on 'ログアウト'
+      logout
       visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
       expect(page).to have_content('まだお店が登録されていません')
-      expect(page).to have_content('ログインしてリストを保存する')
-      click_on 'ログインしてリストを保存する'
+      expect(page).to have_content('新規登録してリストを保存する')
+      click_on '新規登録してリストを保存する'
       expect(page).to have_content('新規登録')
       fill_in 'user_email', with: 'test@gmail.com'
       fill_in 'user_name', with: 'test user'
