@@ -166,6 +166,7 @@ RSpec.describe 'manage lists', type: :system do
       # expect(page).to have_content('共有リンクを発行する')
       # click_on '共有リンクを発行する'
       # expect(page).to have_content('共有リンクが発行されました')
+      find('.fa-star').click
       click_on 'ログアウト'
       expect(page).to have_content('ログアウトしました')
       OmniAuth.config.mock_auth[:facebook] = nil
@@ -192,6 +193,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('リストを登録しました')
       expect(page).to have_content('list11')
       click_on 'list11'
+      find('.fa-star').click
       click_on 'ログアウト'
       expect(page).to have_content('ログアウトしました')
       visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
@@ -219,6 +221,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('リストを登録しました')
       expect(page).to have_content('list11')
       click_on 'list11'
+      find('.fa-star').click
       click_on 'ログアウト'
       expect(page).to have_content('ログアウトしました')
       visit shared_list_path(user.lists.last.id, share_hash: user.lists.last.share_hash)
@@ -243,6 +246,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(user.lists.last.title).to eq 'list11'
       expect(page).to have_content('リストを登録しました')
       expect(page).to have_content('list11')
+      find('.fa-star').click
       click_on 'ログアウト'
       expect(page).to have_content('ログアウトしました')
       # list
