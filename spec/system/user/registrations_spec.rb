@@ -1,5 +1,4 @@
 require 'rails_helper'
-include Warden::Test::Helpers
 
 RSpec.describe 'user registrations', type: :system do
   describe 'user registrations' do
