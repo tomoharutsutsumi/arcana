@@ -26,11 +26,11 @@
 <% else %>
   <div class="text-center mt-3">まだお店が登録されていません</div>
 <% end %>
-<div class="text-center mt-3">
+<div class="text-center mt-5">
   <% if user_signed_in? %>
     <div><%= link_to 'このリストをMyリストに保存する', requests_shared_lists_path(share_hash: @list.share_hash), method: :post %></div>
   <% else %>
     <div><%= link_to '新規登録してリストを保存する', new_user_registration_path(share_hash: @list.share_hash) %></div>
-    <div><%= link_to 'ログインしてリストを保存する', new_user_session_path(share_hash: @list.share_hash) %></div>
+    <div class="mt-4"><%= link_to 'ログインしてリストを保存する', new_user_session_path(share_hash: @list.share_hash) %></div>
   <% end %>
 </div>

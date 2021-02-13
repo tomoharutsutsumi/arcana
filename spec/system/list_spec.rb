@@ -95,7 +95,6 @@ RSpec.describe 'manage lists', type: :system do
       page.all(:css, '.fa-search')[0].click
       click_on '登録する', match: :first 
       expect(page).to have_content('お店を登録しました')
-      logout
 
       # send a request to this user
 
