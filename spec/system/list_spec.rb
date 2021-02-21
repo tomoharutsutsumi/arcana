@@ -303,7 +303,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('リスト名 が空欄です')
     end
 
-    it 'can not be saved if the list has already been shared',type: :doing do
+    it 'can not be saved if the list has already been shared' do
       expect(page).to have_content('Myリストがまだ追加されていません')
       click_on '+リスト追加'
       expect(page).to have_content('リストを登録する')
@@ -336,7 +336,7 @@ RSpec.describe 'manage lists', type: :system do
       expect(page).to have_content('list11', count: 1)
     end
 
-    it 'can not be saved if the list has already been shared with normal login',type: :doing do
+    it 'can not be saved if the list has already been shared with normal login' do
       expect(page).to have_content('Myリストがまだ追加されていません')
       click_on '+リスト追加'
       expect(page).to have_content('リストを登録する')

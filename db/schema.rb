@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_055925) do
+ActiveRecord::Schema.define(version: 2021_02_21_112323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 2021_01_23_055925) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_archived_lists_on_user_id"
   end
 
   create_table "archived_restaurants", force: :cascade do |t|
-    t.bigint "archived_list_id"
+    t.bigint "archived_list_id", null: false
     t.integer "price"
     t.text "comment"
     t.text "url"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2021_01_23_055925) do
   end
 
   create_table "archivings", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "archived_list_id"
+    t.bigint "user_id", null: false
+    t.bigint "archived_list_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["archived_list_id"], name: "index_archivings_on_archived_list_id"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_055925) do
 
   create_table "lists", force: :cascade do |t|
     t.string "title"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "share_hash", default: "", null: false
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2021_01_23_055925) do
   end
 
   create_table "permission_lists", force: :cascade do |t|
-    t.bigint "list_id"
-    t.bigint "permission_request_id"
+    t.bigint "list_id", null: false
+    t.bigint "permission_request_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["list_id", "permission_request_id"], name: "index_permission_lists_on_list_id_and_permission_request_id", unique: true
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2021_01_23_055925) do
   end
 
   create_table "permission_requests", force: :cascade do |t|
-    t.integer "sent_from_id"
-    t.integer "sent_to_id"
+    t.integer "sent_from_id", null: false
+    t.integer "sent_to_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_055925) do
   end
 
   create_table "restaurants", force: :cascade do |t|
-    t.bigint "list_id"
+    t.bigint "list_id", null: false
     t.integer "price"
     t.text "comment"
     t.text "url"
@@ -110,15 +110,6 @@ ActiveRecord::Schema.define(version: 2021_01_23_055925) do
     t.integer "walk"
     t.string "image"
     t.index ["list_id"], name: "index_restaurants_on_list_id"
-  end
-
-  create_table "share_hashes", force: :cascade do |t|
-    t.bigint "list_id"
-    t.string "hash_string", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["hash_string"], name: "index_share_hashes_on_hash_string", unique: true
-    t.index ["list_id"], name: "index_share_hashes_on_list_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -146,5 +137,4 @@ ActiveRecord::Schema.define(version: 2021_01_23_055925) do
   add_foreign_key "permission_lists", "lists"
   add_foreign_key "permission_lists", "permission_requests"
   add_foreign_key "restaurants", "lists"
-  add_foreign_key "share_hashes", "lists"
 end
