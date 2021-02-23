@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      # resources :archived_lists
+      # resources :archived_restaurants
+      # resources :archivings
+      # resources :lists
+      resources :original_restaurants
+      # resources :permission_lists
+      # resources :permission_requests
+      # resources :restaurants
+
+      root to: "users#index"
+    end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',

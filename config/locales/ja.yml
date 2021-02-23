@@ -1,10 +1,22 @@
 ja:
   activerecord:
+    models:
+      original_restaurant: レストラン
     attributes:
       user:
         name: '名前'
       list:
         title: 'リスト名'
+      original_restaurant:
+        price: 平均価格
+        url: URL
+        name: 名前
+        category: カテゴリー
+        place: 場所
+        tel: 電話番号
+        opentime: 開店時間
+        holiday: 定休日
+        combined_access: アクセス
     errors:
       models:
         user:
