@@ -2,9 +2,12 @@ ja:
   activerecord:
     models:
       original_restaurant: レストラン
+      admin_user: 管理者
     attributes:
       user:
         name: '名前'
+      admin_user:
+        encrypted_password: 'パスワード'
       list:
         title: 'リスト名'
       original_restaurant:

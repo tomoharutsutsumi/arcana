@@ -1,24 +1,18 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, controllers: {
+    sessions: 'admin_users/sessions',
+  }
   namespace :admin do
-      resources :users
-      # resources :archived_lists
-      # resources :archived_restaurants
-      # resources :archivings
-      # resources :lists
-      resources :original_restaurants
-      # resources :permission_lists
-      # resources :permission_requests
-      # resources :restaurants
-
-      root to: "users#index"
-    end
+    resources :original_restaurants
+    resources :admin_users
+    root to: "original_restaurants#index"
+  end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
   root 'users/lists#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :users do
     resources :searches
   end
