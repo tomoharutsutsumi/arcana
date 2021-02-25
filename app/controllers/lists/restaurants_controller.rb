@@ -8,7 +8,7 @@ class Lists::RestaurantsController < ApplicationController
   def new
     @searched = params.has_key?(:freeword)
     if @searched
-      @results = Restaurant.get_info_from_api(params[:freeword])
+      @results = RestaurantFinder.new.find(params[:freeword])
       @restaurant = @list.restaurants.build
     end
     @link = list_restaurants_path(@list)

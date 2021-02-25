@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     resources :share_hashes, module: :lists
   end
   resources :restaurants
+  namespace :restaurants do
+    resources :requests
+  end
   resources :archived_lists do
     resources :archived_restaurants, module: :archived_lists
   end

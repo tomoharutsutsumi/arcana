@@ -44,6 +44,18 @@
 
 <% if @searched %>
   <div class="mt-5"><hr></div>
+  <h4 class="text-center">登録リクエスト</h4>
+  <div class="text-center"><small>アルカナに登録してほしいお店をリクエストできます</small></div>
+  <%= form_with url: restaurants_requests_path, local: true, class: "text-center" do |f| %>
+    <div class="mb-3" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+      <%= f.text_field :name, class: "h-100", style: 'border: none; width: 80%; outline: none;', placeholder: '店名(正確な名称にてお願いします)' %>
+    </div>
+    <%= f.submit 'リクエスト' %>
+  <% end %>
+<% end %>
+
+<% if @searched %>
+  <div class="mt-5"><hr></div>
   <div></div>
   <h4 class="text-center">自分で登録</h4>
   <%= form_with model: @restaurant, url: list_restaurants_path, local: true, class: "text-center mt-3" do |f| %>
