@@ -5,6 +5,11 @@ class AddNullFalse < ActiveRecord::Migration[5.2]
         l.update(user_id: 1)
       end
     end
+    PermissionList.all.find_each do |l|
+      if l.permission_request_id == nil
+        l.update(permission_request_id: 1)
+      end
+    end
     change_column_null :archived_lists, :user_id, false
     change_column_null :archived_restaurants, :archived_list_id, false
     change_column_null :archivings, :user_id, false
