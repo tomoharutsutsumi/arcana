@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_112323) do
+ActiveRecord::Schema.define(version: 2021_02_28_144250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
 
   create_table "archived_lists", force: :cascade do |t|
     t.string "title"
@@ -65,6 +77,25 @@ ActiveRecord::Schema.define(version: 2021_02_21_112323) do
     t.string "share_hash", default: "", null: false
     t.index ["share_hash"], name: "index_lists_on_share_hash", unique: true
     t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
+  create_table "original_restaurants", force: :cascade do |t|
+    t.integer "price"
+    t.text "url"
+    t.string "name"
+    t.string "category"
+    t.string "place"
+    t.string "tel"
+    t.string "opentime"
+    t.string "holiday"
+    t.string "combined_access"
+    t.string "line"
+    t.string "station"
+    t.string "station_exit"
+    t.integer "walk"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "permission_lists", force: :cascade do |t|

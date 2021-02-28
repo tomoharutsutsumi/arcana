@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price: 1
+  url: MyText
+  name: MyString
+  category: MyString
+  place: MyString
+  tel: MyString
+  opentime: MyString
+  holiday: MyString
+  combined_access: MyString
+  line: MyString
+  station: MyString
+  station_exit: MyString
+  walk: 1
+  image: MyString
+
+two:
+  price: 1
+  url: MyText
+  name: MyString
+  category: MyString
+  place: MyString
+  tel: MyString
+  opentime: MyString
+  holiday: MyString
+  combined_access: MyString
+  line: MyString
+  station: MyString
+  station_exit: MyString
+  walk: 1
+  image: MyString

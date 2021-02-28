@@ -13,7 +13,7 @@
   </div>
 <% end %>
 
-<% if @searched && @results %>
+<% if @searched && @results.present? %>
   <% @results.each do |r| %>
     <div class="card my-3">
       <div class="card-header d-flex justify-content-end">
@@ -38,8 +38,20 @@
       </div>
     </div>
   <% end %>
-<% elsif @searched && !@results %>
+<% elsif @searched && @results.empty? %>
   <div class="mt-3">該当するお店が見つかりませんでした。</div>
+<% end %>
+
+<% if @searched %>
+  <div class="mt-5"><hr></div>
+  <h4 class="text-center">登録リクエスト</h4>
+  <div class="text-center"><small>アルカナに登録してほしいお店をリクエストできます</small></div>
+  <%= form_with url: restaurants_requests_path, local: true, class: "text-center" do |f| %>
+    <div class="mb-3" style="border: 1px solid gray; border-radius: 9px; height: 40px;">
+      <%= f.text_field :name, class: "h-100", style: 'border: none; width: 80%; outline: none;', placeholder: '店名(正確な名称にてお願いします)' %>
+    </div>
+    <%= f.submit 'リクエスト' %>
+  <% end %>
 <% end %>
 
 <% if @searched %>
