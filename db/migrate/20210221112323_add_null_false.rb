@@ -1,7 +1,7 @@
 class AddNullFalse < ActiveRecord::Migration[5.2]
   def change
     ArchivedList.all.find_each do |l|
-      if l.user_id == null
+      if l.user_id == nil
         l.update(user_id: 1)
       end
     end
