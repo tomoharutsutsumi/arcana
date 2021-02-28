@@ -13,7 +13,7 @@
   </div>
 <% end %>
 
-<% if @searched && @results %>
+<% if @searched && @results.present? %>
   <% @results.each do |r| %>
     <div class="card my-3">
       <div class="card-header d-flex justify-content-end">
@@ -38,7 +38,7 @@
       </div>
     </div>
   <% end %>
-<% elsif @searched && !@results %>
+<% elsif @searched && @results.empty? %>
   <div class="mt-3">該当するお店が見つかりませんでした。</div>
 <% end %>
 
